@@ -36,27 +36,20 @@ class LoginViewController: UIViewController {
                 case .success(let value):
                     var json:JSON = JSON(value);
                     
-                    if(json == "Sign In Sccessfully"){
-                        UserDefaults.standard.set(self.usernameTF.text!, forKey: "userid")
-                        
+                    if(json == "Sign In Sccessfully" ){
+                        UserDefaults.standard.set(self.usernameTF.text!, forKey: "username")
+    
                         let alertController = UIAlertController(title: "Message", message: response.result.value, preferredStyle: .alert)
                         
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {(alertAction)in  self.navigationController?.popToRootViewController(animated: true)}))
                         
                         self.present(alertController, animated: true, completion: nil)
                         
-                        
-                        
-                        
                     }else{
-                        
                         let alertController = UIAlertController(title: "Message", message: response.result.value, preferredStyle: .alert)
-                        
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                         self.present(alertController, animated: true, completion: nil)
-                        
                     }
-                    
                 case .failure(let error):
                     break
                     

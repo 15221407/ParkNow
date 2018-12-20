@@ -13,9 +13,11 @@ import SwiftyJSON
 
 import Foundation
 import RealmSwift
+import CoreImage
 
 class MyAccountTableViewController: UITableViewController {
 var userLogin = false
+    @IBOutlet var qrCodeImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,21 +31,23 @@ var userLogin = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setUpButton()
 
+        tableView.reloadData()
+    }
+    
+    func setUpButton(){
         let Loginbutton = view.viewWithTag(101) as? UIButton
         let Logoutbutton = view.viewWithTag(102) as? UIButton
-            if(UserDefaults.standard.string(forKey: "userid") != nil){
-                Logoutbutton!.setTitle("Sign out", for: .normal)
-                Logoutbutton?.isHidden = false
-                Loginbutton?.isHidden = true
-            }else if(UserDefaults.standard.string(forKey: "userid") == nil){
-                Loginbutton!.setTitle("Please sign in first.", for: .normal)
-                Loginbutton?.isHidden = false
-                Logoutbutton?.isHidden = true
-            }
-    
-        
-        tableView.reloadData()
+        if(UserDefaults.standard.string(forKey: "username") != nil){
+            Logoutbutton!.setTitle("Sign out", for: .normal)
+            Logoutbutton?.isHidden = false
+            Loginbutton?.isHidden = true
+        }else if(UserDefaults.standard.string(forKey: "username") == nil){
+            Loginbutton!.setTitle("Please sign in first.", for: .normal)
+            Loginbutton?.isHidden = false
+            Logoutbutton?.isHidden = true
+        }
     }
     
     // MARK: - Table view data source
@@ -51,8 +55,12 @@ var userLogin = false
     
     
     @IBAction func accountLogout(_ sender: Any) {
-        Alamofire.request("https://192.168.0.183:1337/user/logout", method: .post)
-            .responseString { response in
+//        let username = UserDefaults.standard.string(forKey: "userid")
+//        let password = UserDefaults.standard.string(forKey: "userpw")
+        
+//        let parameters : Parameters = ["username": username , "password": password]
+        
+        Alamofire.request("http://192.168.0.183:1337/user/logout", method: .get).responseString { response in
                 print("Response String: \(response.result.value ?? "No data")")
                 switch response.result{
                 case .success(let value):
@@ -64,11 +72,8 @@ var userLogin = false
                     
                     self.present(alertController, animated: true, completion: nil)
                     
-                    UserDefaults.standard.set(nil, forKey: "userid")
-                    
-                    self.userLogin = false
-                    
-                    self.tableView.reloadData()
+                    UserDefaults.standard.set(nil, forKey: "username")
+                    self.setUpButton()
                     
                 case .failure(let error):
                     break
@@ -78,7 +83,7 @@ var userLogin = false
     }
 
     @IBAction func qrCodeClicked(_ sender: Any) {
-        if(UserDefaults.standard.string(forKey: "userid") != nil){
+        if(UserDefaults.standard.string(forKey: "username") != nil){
             self.getQRCode()
         }else{
             let alertController = UIAlertController(title: "Message", message: "Please login first.", preferredStyle: .alert)
@@ -91,18 +96,24 @@ var userLogin = false
     }
     
     func getQRCode(){
-        Alamofire.request("https://192.168.0.183:1337/user/qrCode", method: .post)
-            .responseString { response in
+        
+        let username = UserDefaults.standard.string(forKey: "username")
+        print(username!)
+        let parameters : Parameters = ["username":username!]
+        
+        Alamofire.request("http://192.168.0.183:1337/user/qrCode", method: .post, parameters: parameters).responseString { response in
                 print("QR Code: \(response.result.value ?? "No data")")
                 switch response.result{
     
                 case .success(let value):
                     var json:JSON = JSON(value);
                     
-                    let alertController = UIAlertController(title: "QR Code", message: response.result.value, preferredStyle: .alert)
-                
+                    
+                    let alertController = UIAlertController(title: "QR Code", message:"", preferredStyle: .alert)
+            
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
+                
                     
                 case .failure(let error):
                     break
@@ -110,6 +121,7 @@ var userLogin = false
         }
         
     }
+
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
