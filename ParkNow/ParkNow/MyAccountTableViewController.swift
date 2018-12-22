@@ -17,10 +17,12 @@ import CoreImage
 
 class MyAccountTableViewController: UITableViewController {
 var userLogin = false
-    @IBOutlet var qrCodeImage: UIImageView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -67,6 +69,8 @@ var userLogin = false
                     var json:JSON = JSON(value);
                     
                     let alertController = UIAlertController(title: "Message", message: "Logout successfully.", preferredStyle: .alert)
+                
+                    
                     
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                     
@@ -96,9 +100,7 @@ var userLogin = false
     }
     
     func getQRCode(){
-        
         let username = UserDefaults.standard.string(forKey: "username")
-        print(username!)
         let parameters : Parameters = ["username":username!]
         
         Alamofire.request("http://192.168.0.183:1337/user/qrCode", method: .post, parameters: parameters).responseString { response in
@@ -106,12 +108,38 @@ var userLogin = false
                 switch response.result{
     
                 case .success(let value):
-                    var json:JSON = JSON(value);
+//                    var json:JSON = JSON(value);
+                    let currentDateTime = Date()
+    
+                    // initialize the date formatter and set the style
+                    let formatter = DateFormatter()
+                    formatter.timeStyle = .medium
+                    formatter.dateStyle = .medium
+                    // get the date time String from the date object
+                    let timeString = "Updated at " + formatter.string(from: currentDateTime)
+
                     
+                    let alertController = UIAlertController(title: "QR Code", message: timeString, preferredStyle: .alert)
                     
-                    let alertController = UIAlertController(title: "QR Code", message:"", preferredStyle: .alert)
-            
-                    alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                    //set imageView for QR Code
+                    let imageView = UIImageView(frame: CGRect(x: 10, y: 90, width: 250, height: 250))
+                    let imageUrl = URL(string:response.result.value! )!
+                    let imageData = try! Data(contentsOf: imageUrl)
+                    imageView.image = UIImage(data: imageData, scale:1)
+                    alertController.view.addSubview(imageView)
+                    
+                    //add height
+                    var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.58)
+                    alertController.view.addConstraint(height);
+                    UIScreen.main.brightness = CGFloat(0.6)
+                    
+                    //refresh button
+                    let refreshAction = UIAlertAction(title: "Refresh", style: .default, handler: {( alertController: UIAlertAction?) in self.getQRCode()})
+                    alertController.addAction(refreshAction)
+                
+                    //cancel button
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                   alertController.addAction(cancelAction)
                     self.present(alertController, animated: true, completion: nil)
                 
                     
@@ -140,6 +168,7 @@ var userLogin = false
         return cell
     }
 
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -187,3 +216,5 @@ var userLogin = false
     */
 
 }
+
+
