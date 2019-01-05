@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIKit
 import Alamofire
 import SwiftyJSON
 
@@ -16,26 +15,55 @@ import RealmSwift
 import CoreImage
 
 class MyAccountTableViewController: UITableViewController {
-var userLogin = false
-
+    var userLogin = false
+    @IBOutlet var helloLabel: UILabel!
+    @IBOutlet var currentPointLabel: UILabel!
+    var currentPoint:String = ""
+    var currentBrightness = UIScreen.main.brightness;
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setUpButton()
-
+        self.setUpLabel()
+        self.currentBrightness = UIScreen.main.brightness
         tableView.reloadData()
+    }
+    
+    func setUpLabel(){
+        if(UserDefaults.standard.string(forKey: "username") != nil){
+        self.getPoint()
+        var username = UserDefaults.standard.string(forKey: "username")
+        self.helloLabel.text = "Hello, " + username! + "!"
+            self.currentPointLabel.text = "You have " + self.currentPoint + " points."
+            self.tableView.reloadData();
+        }else{
+           self.helloLabel.text = "Hello, visitor!"
+            self.currentPointLabel.text = "Join us and Gain points"
+        }
+    }
+    
+    func getPoint() {
+        let username = UserDefaults.standard.string(forKey: "username")
+        let parameters : Parameters = ["username":username!]
+        Alamofire.request("http://192.168.0.183:1337/member/getPoint", method: .post, parameters: parameters).responseString { response in
+            print("Get Points: \(response.result.value ?? "No data")")
+            switch response.result{
+            case .success(let value):
+                self.currentPoint = value
+                self.currentPointLabel.text = "You have " + self.currentPoint + " points."
+                self.tableView.reloadData();
+            case .failure(let error):
+                self.currentPoint = "0"
+                break
+            }
+        }
+        
     }
     
     func setUpButton(){
@@ -57,27 +85,21 @@ var userLogin = false
     
     
     @IBAction func accountLogout(_ sender: Any) {
-//        let username = UserDefaults.standard.string(forKey: "userid")
-//        let password = UserDefaults.standard.string(forKey: "userpw")
-        
-//        let parameters : Parameters = ["username": username , "password": password]
-        
         Alamofire.request("http://192.168.0.183:1337/user/logout", method: .get).responseString { response in
                 print("Response String: \(response.result.value ?? "No data")")
                 switch response.result{
                 case .success(let value):
-                    var json:JSON = JSON(value);
+//                    var json:JSON = JSON(value);
                     
                     let alertController = UIAlertController(title: "Message", message: "Logout successfully.", preferredStyle: .alert)
                 
-                    
-                    
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                     
                     self.present(alertController, animated: true, completion: nil)
                     
                     UserDefaults.standard.set(nil, forKey: "username")
                     self.setUpButton()
+                    self.setUpLabel()
                     
                 case .failure(let error):
                     break
@@ -91,15 +113,18 @@ var userLogin = false
             self.getQRCode()
         }else{
             let alertController = UIAlertController(title: "Message", message: "Please login first.", preferredStyle: .alert)
-            
             alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-            
             self.present(alertController, animated: true, completion: nil)
         }
-        
+    }
+    
+    func closeQrcode(){
+        UIScreen.main.brightness = self.currentBrightness
+        self.getPoint()
     }
     
     func getQRCode(){
+    
         let username = UserDefaults.standard.string(forKey: "username")
         let parameters : Parameters = ["username":username!]
         
@@ -131,24 +156,32 @@ var userLogin = false
                     //add height
                     var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.58)
                     alertController.view.addConstraint(height);
-                    UIScreen.main.brightness = CGFloat(0.6)
                     
                     //refresh button
                     let refreshAction = UIAlertAction(title: "Refresh", style: .default, handler: {( alertController: UIAlertAction?) in self.getQRCode()})
                     alertController.addAction(refreshAction)
                 
                     //cancel button
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { ( alertController: UIAlertAction?) in self.closeQrcode() })
                    alertController.addAction(cancelAction)
+                    
                     self.present(alertController, animated: true, completion: nil)
-                
+                    self.tableView.reloadData();
+                    //adjust the brightness
+                    UIScreen.main.brightness = CGFloat(1)
                     
                 case .failure(let error):
                     break
                 }
         }
         
+        
+     
+      
+        
     }
+    
+    
 
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -164,6 +197,14 @@ var userLogin = false
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "accountCell", for: indexPath)
+        
+        if(indexPath.row == 0){
+            cell.textLabel?.text = "My Shopping Records"
+        }else if(indexPath.row == 1){
+            cell.textLabel?.text = "My Parking Records"
+        }else if(indexPath.row == 2){
+            cell.textLabel?.text = "Do redemption"
+        }
 
         return cell
     }

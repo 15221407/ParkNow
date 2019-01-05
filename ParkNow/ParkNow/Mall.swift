@@ -17,7 +17,7 @@ class Mall: Object {
     @objc dynamic var address: String? = nil
     @objc dynamic var contact: String? = nil
     @objc dynamic var parkingFee: String? = nil
-    @objc dynamic var spending: String? = nil
+    @objc dynamic var spending: Int = 0
     @objc dynamic var poster: String? = nil
     @objc dynamic var lots: Int = 0
     @objc dynamic var details: String? = nil

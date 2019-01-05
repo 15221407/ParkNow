@@ -19,20 +19,41 @@ class MallDateilViewController: UIViewController {
     var latitude:Double = 0
     var longitude:Double = 0
     var address:String = ""
+    var contact:String = ""
+    var spending:Int = 0
+     var lots:String?
 //    var lots:Int = 0
     var realmResults:Results<Mall>?
     
     @IBOutlet var mapView: MKMapView!
-    
     @IBOutlet var lotsView: UIView!
+    @IBOutlet var addressLabel: UILabel!
+    @IBOutlet var contactLabel: UILabel!
+    @IBOutlet var offerLabel: UILabel!
+    @IBOutlet var offer1Label: UILabel!
+    @IBOutlet var offer2Label: UILabel!
+    @IBOutlet var offer3Label: UILabel!
+    @IBOutlet var lotsLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUpMap()
-//        self.getData()
-        
-        // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.getLots()
+    }
+    
+    func setLabel(){
+        addressLabel.text = "Address: " + address
+        contactLabel.text = "Contact: " + contact
+        offerLabel.text = "Parking Offer:"
+        offer1Label.text = "HK$" + String(spending) + " per 1 Hour"
+        offer2Label.text = "HK$" + String(spending*2) + " per 2 Hours"
+        offer3Label.text = "HK$" + String(spending*3) + " per 3 Hours"
+        lotsLabel.text = "Available lots: " + self.lots!
+        
+    }
+
     
     func setUpMap(){
         let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
@@ -48,9 +69,29 @@ class MallDateilViewController: UIViewController {
         
         pin.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         pin.title = mallName
-        pin.subtitle = "Available lots: "
+        pin.subtitle = "Available lots: " + self.lots!
+        
+       
         
         mapView.addAnnotation(pin)
+    }
+    
+    func getLots() {
+        let parameters : Parameters = ["mallName":mallName]
+       
+        Alamofire.request("http://192.168.0.183:1337/mall/getLots", method: .post, parameters: parameters).responseString { response in
+            print("Get Lots: \(response.result.value ?? "No data")")
+            switch response.result{
+            case .success(let value):
+                self.lots = value
+            case .failure(let error):
+                self.lots = "Fail to return available lots. Try again."
+            break
+            }
+            self.setUpMap()
+            self.setLabel()
+        }
+
     }
     /*
      // MARK: - Navigation

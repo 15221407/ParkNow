@@ -34,7 +34,7 @@ class HomeTableViewController: UITableViewController {
         
         Alamofire.request(url, method: .get).validate().responseJSON { response in
             
-            print("Result: \(response.result)") // response serialization result
+            print("Mall: \(response.result)") // response serialization result
             
             switch response.result {
                 
@@ -49,15 +49,14 @@ class HomeTableViewController: UITableViewController {
                 }
                 
                 for index in 0..<json.count {
-                    
                     let mall = Mall()
                     mall.mallId = json[index]["id"].stringValue
                     mall.name = json[index]["name"].stringValue
                     mall.district = json[index]["district"].stringValue
-//                    mall.lots = json[index]["lots"].intValue
                     mall.address = json[index]["address"].stringValue
-//                  mall.contact = json[index]["contact].stringValue
+                    mall.contact = json[index]["contact"].stringValue
                     mall.parkingFee = json[index]["parkingFee"].stringValue
+                    mall.spending = json[index]["spending"].intValue
                     mall.longitude = json[index]["longitude"].doubleValue
                     mall.latitude = json[index]["latitude"].doubleValue
                     
@@ -129,15 +128,13 @@ class HomeTableViewController: UITableViewController {
             if let viewController = segue.destination as? MallDateilViewController {
                 
                 var selectedIndex = tableView.indexPathForSelectedRow!
-//                print("realm " + realmResults?[selectedIndex.row].latitude as! Double);
-//                print("realm ", +realmResults?[selectedIndex.row].longitude as! Double);
-                
                 viewController.mallId =  realmResults?[selectedIndex.row].mallId as! String
-//                viewController.lots =  realmResults?[selectedIndex.row].lots as! Int
                 viewController.mallName =  realmResults?[selectedIndex.row].name as! String
                 viewController.latitude =  realmResults?[selectedIndex.row].latitude as! Double
                 viewController.longitude =  realmResults?[selectedIndex.row].longitude as! Double
                 viewController.address =  realmResults?[selectedIndex.row].address as! String
+                viewController.contact =  realmResults?[selectedIndex.row].contact as! String
+                 viewController.spending =  realmResults?[selectedIndex.row].spending as! Int
                 
             }
         }
