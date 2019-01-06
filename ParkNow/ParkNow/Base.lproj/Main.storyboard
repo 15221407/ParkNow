@@ -153,31 +153,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="shoppingRecordCell" id="ptA-dZ-WnK">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="shoppingRecordCell" rowHeight="76" id="ptA-dZ-WnK">
+                                <rect key="frame" x="0.0" y="28" width="375" height="76"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ptA-dZ-WnK" id="hq7-yQ-4ml">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbc-Ui-wqM">
-                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5n-LS-tTY">
+                                            <rect key="frame" x="16" y="26" width="343" height="49"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5n-LS-tTY">
-                                            <rect key="frame" x="317" y="10" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbc-Ui-wqM">
+                                            <rect key="frame" x="16" y="11" width="343" height="31"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Lbc-Ui-wqM" firstAttribute="top" secondItem="hq7-yQ-4ml" secondAttribute="topMargin" id="5VP-xn-5oZ"/>
-                                        <constraint firstItem="Lbc-Ui-wqM" firstAttribute="leading" secondItem="hq7-yQ-4ml" secondAttribute="leadingMargin" id="eEg-rh-bNi"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Lbc-Ui-wqM" secondAttribute="bottom" constant="1" id="jlJ-yc-jMP"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="f5n-LS-tTY" secondAttribute="bottom" constant="-10" id="3K2-ti-Q34"/>
+                                        <constraint firstItem="Lbc-Ui-wqM" firstAttribute="trailing" secondItem="hq7-yQ-4ml" secondAttribute="trailingMargin" id="9Z6-Nn-94k"/>
+                                        <constraint firstItem="Lbc-Ui-wqM" firstAttribute="leading" secondItem="hq7-yQ-4ml" secondAttribute="leadingMargin" id="KOE-8B-Imu"/>
+                                        <constraint firstItem="Lbc-Ui-wqM" firstAttribute="trailing" secondItem="f5n-LS-tTY" secondAttribute="trailing" id="Mei-qS-X65"/>
+                                        <constraint firstItem="Lbc-Ui-wqM" firstAttribute="leading" secondItem="f5n-LS-tTY" secondAttribute="leading" id="Uef-7e-AM3"/>
+                                        <constraint firstItem="f5n-LS-tTY" firstAttribute="top" secondItem="hq7-yQ-4ml" secondAttribute="topMargin" constant="15" id="bJT-tx-SHE"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Lbc-Ui-wqM" secondAttribute="bottom" constant="23" id="hzC-Mv-56q"/>
+                                        <constraint firstItem="Lbc-Ui-wqM" firstAttribute="top" secondItem="hq7-yQ-4ml" secondAttribute="topMargin" id="uSB-GJ-mnX"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -189,7 +193,7 @@
                     </tableView>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1924" y="1666"/>
+            <point key="canvasLocation" x="1924" y="1665.5172413793105"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="vP2-iu-udj">

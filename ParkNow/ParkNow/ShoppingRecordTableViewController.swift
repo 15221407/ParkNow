@@ -20,27 +20,28 @@ class ShoppingRecordTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getShoppingRecord();
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.getDatafromDB()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.tableView.reloadData();
     }
 
+
     
-    func getShoppingRecord() {
-        let realm = try! Realm()
+    func getDatafromDB(){
         
-        Alamofire.request("http://192.168.0.183:1337/member/showShoppingRecord", method: .get).responseString { response in
-            print("Shopping Records: \(response.result.value ?? "No data")")
-            switch response.result{
-            case .success(let value):
+        let realm = try! Realm()
+        let url = "http://192.168.0.183:1337/member/showShoppingRecord"
+        
+        
+        Alamofire.request(url, method: .get).validate().responseJSON { response in
+            
+            print("Record: \(response.result.value)") // response serialization result
+            
+            switch response.result {
                 
+            case .success(let value):
                 
                 //self.json = JSON(value)
                 let json:JSON = JSON(value);
@@ -63,13 +64,15 @@ class ShoppingRecordTableViewController: UITableViewController {
                 }
                 self.realmResults = realm.objects(ShoppingRecord.self)
                 
-                self.tableView.reloadData();
-            
+                self.tableView.reloadData()
+                
+                
             case .failure(let error):
-    
-                break
+                print(error)
             }
         }
+        
+        
     }
     // MARK: - Table view data source
 
@@ -98,7 +101,9 @@ class ShoppingRecordTableViewController: UITableViewController {
         }
         
         if let pointLabel = cell.viewWithTag(102) as? UILabel {
-            pointLabel.text = self.realmResults?[indexPath.row].point as! String
+            var point = self.realmResults?[indexPath.row].point as! String
+            var consumption = self.realmResults?[indexPath.row].consumption as! String
+            pointLabel.text = "Spending: $" + consumption + ". Total point earned: " + point
         }
         
         return cell

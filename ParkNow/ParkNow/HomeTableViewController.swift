@@ -34,7 +34,7 @@ class HomeTableViewController: UITableViewController {
         
         Alamofire.request(url, method: .get).validate().responseJSON { response in
             
-            print("Mall: \(response.result)") // response serialization result
+            print("Mall info: \(response.result.value)") // response serialization result
             
             switch response.result {
                 
@@ -59,6 +59,7 @@ class HomeTableViewController: UITableViewController {
                     mall.spending = json[index]["spending"].intValue
                     mall.longitude = json[index]["longitude"].doubleValue
                     mall.latitude = json[index]["latitude"].doubleValue
+                    mall.poster = json[index]["poster"].stringValue
                     
                     try! realm.write {
                         realm.add(mall)
