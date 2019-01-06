@@ -22,6 +22,7 @@
 		A3AAE98E21C9535B00F7A2A9 /* MallDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */; };
 		A3B7F2ED21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2EC21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift */; };
 		A3B7F2EF21E0A25000BFBB07 /* ShoppingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */; };
+		A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */; };
 		E3441DAD4C70C3642DF2D6DB /* Pods_ParkNowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0684CC2D42DBCBA8D42C8354 /* Pods_ParkNowTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MallDetailViewController.swift; sourceTree = "<group>"; };
 		A3B7F2EC21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingRecordTableViewController.swift; sourceTree = "<group>"; };
 		A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingRecord.swift; sourceTree = "<group>"; };
+		A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindYourCarViewController.swift; sourceTree = "<group>"; };
 		C27568936DA77987568535D1 /* Pods-ParkNowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkNowTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkNowTests/Pods-ParkNowTests.release.xcconfig"; sourceTree = "<group>"; };
 		C94BFBFDC23CB83F6850216B /* Pods-ParkNow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkNow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkNow/Pods-ParkNow.debug.xcconfig"; sourceTree = "<group>"; };
 		CA3C414ACE5CF2566C0C5F71 /* Pods_ParkNow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParkNow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				A321987C21C7F68400D7D546 /* LoginViewController.swift */,
 				A393F40121CA75250011A37B /* MyAccountTableViewController.swift */,
 				A3B7F2EC21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift */,
+				A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */,
 			);
 			path = ParkNow;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A321987D21C7F68400D7D546 /* LoginViewController.swift in Sources */,
+				A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */,
 				A321987B21C7F66B00D7D546 /* HomeTableViewController.swift in Sources */,
 				A351A86421C7E38600025250 /* AppDelegate.swift in Sources */,
 				A393F40221CA75250011A37B /* MyAccountTableViewController.swift in Sources */,

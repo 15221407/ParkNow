@@ -49,8 +49,7 @@ class MyAccountTableViewController: UITableViewController {
     }
     
     func getPoint() {
-//        let username = UserDefaults.standard.string(forKey: "username")
-//        let parameters : Parameters = ["username":username!]
+
         Alamofire.request("http://192.168.0.183:1337/member/getPoint", method: .get).responseString { response in
             print("Get Points: \(response.result.value ?? "No data")")
             switch response.result{
