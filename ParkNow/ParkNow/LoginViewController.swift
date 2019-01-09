@@ -44,6 +44,7 @@ class LoginViewController: UIViewController {
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {(alertAction)in  self.navigationController?.popToRootViewController(animated: true)}))
                         
                         self.present(alertController, animated: true, completion: nil)
+                        UIApplication.shared.registerForRemoteNotifications();
                         
                     }else{
                         let alertController = UIAlertController(title: "Message", message: response.result.value, preferredStyle: .alert)

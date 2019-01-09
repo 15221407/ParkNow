@@ -22,7 +22,7 @@
                     <connections>
                         <segue destination="BKr-lm-cgE" kind="relationship" relationship="viewControllers" id="SuO-s1-fAo"/>
                         <segue destination="c3Q-IG-KcF" kind="relationship" relationship="viewControllers" id="0y1-BC-knH"/>
-                        <segue destination="MwS-f3-GBB" kind="relationship" relationship="viewControllers" id="C1n-Qv-uV4"/>
+                        <segue destination="F1g-Wg-6Zy" kind="relationship" relationship="viewControllers" id="C1n-Qv-uV4"/>
                         <segue destination="H2X-Yo-IIq" kind="relationship" relationship="viewControllers" id="mUf-bf-Bp2"/>
                     </connections>
                 </tabBarController>
@@ -30,7 +30,7 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--MyCar-->
+        <!--View Controller-->
         <scene sceneID="mRm-cn-lpH">
             <objects>
                 <viewController id="MwS-f3-GBB" sceneMemberID="viewController">
@@ -39,10 +39,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuV-xu-AMS">
-                                <rect key="frame" x="121" y="206" width="94" height="30"/>
+                                <rect key="frame" x="121" y="250" width="94" height="30"/>
                                 <state key="normal" title="Bind Your Car"/>
                                 <connections>
-                                    <segue destination="84d-RS-0FH" kind="show" id="wAW-HN-EFy"/>
+                                    <segue destination="84d-RS-0FH" kind="show" id="60j-KK-Nt7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -53,14 +53,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hqx-qQ-njx"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="MyCar" image="first" id="6Tr-HY-nXI"/>
+                    <navigationItem key="navigationItem" id="YYM-mZ-G8O"/>
                     <connections>
                         <outlet property="licensePlateTF" destination="o0v-4A-cIV" id="7kn-Rh-tnN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QQ2-be-Am2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965.60000000000002" y="77.811094452773617"/>
+            <point key="canvasLocation" x="1904.8" y="77.811094452773617"/>
         </scene>
         <!--Bind Your Car View Controller-->
         <scene sceneID="ldd-pQ-PYM">
@@ -71,7 +71,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bind your Car" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGr-hq-Upn">
-                                <rect key="frame" x="88" y="87" width="199" height="21"/>
+                                <rect key="frame" x="88" y="131" width="199" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="m0E-FK-ZEw"/>
                                 </constraints>
@@ -80,20 +80,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your license plate: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20a-TR-l8Z">
-                                <rect key="frame" x="50" y="176" width="181" height="21"/>
+                                <rect key="frame" x="50" y="220" width="181" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fb9-9Y-KaY">
-                                <rect key="frame" x="122" y="303" width="131" height="30"/>
+                                <rect key="frame" x="122" y="347" width="131" height="30"/>
                                 <state key="normal" title="Bind the Car"/>
                                 <connections>
-                                    <action selector="BindBtnClicked:" destination="MwS-f3-GBB" eventType="touchUpInside" id="wGy-Na-j7Z"/>
+                                    <action selector="BindBtnClicked:" destination="84d-RS-0FH" eventType="touchUpInside" id="Sou-kb-3Wj"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o0v-4A-cIV">
-                                <rect key="frame" x="50" y="205" width="275" height="30"/>
+                                <rect key="frame" x="50" y="249" width="275" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -116,10 +116,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hRh-2z-GaR"/>
                     </view>
+                    <connections>
+                        <outlet property="licensePlateTF" destination="o0v-4A-cIV" id="4lt-Xy-Ydi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xx1-jQ-Kwv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1770" y="78"/>
+            <point key="canvasLocation" x="2708" y="77.811094452773617"/>
         </scene>
         <!--My Account Table View Controller-->
         <scene sceneID="ylC-I2-iny">
@@ -592,6 +595,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8w-8T-meN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="984.79999999999995" y="856.82158920539734"/>
+        </scene>
+        <!--MyCar-->
+        <scene sceneID="yfa-QX-QQ0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F1g-Wg-6Zy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="MyCar" image="first" id="6Tr-HY-nXI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Yj2-hc-EM0">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MwS-f3-GBB" kind="relationship" relationship="rootViewController" id="tib-ij-aeK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HIM-O5-p5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="965.60000000000002" y="77.811094452773617"/>
         </scene>
     </scenes>
     <resources>

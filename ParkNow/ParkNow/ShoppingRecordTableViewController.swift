@@ -103,7 +103,7 @@ class ShoppingRecordTableViewController: UITableViewController {
         if let pointLabel = cell.viewWithTag(102) as? UILabel {
             var point = self.realmResults?[indexPath.row].point as! String
             var consumption = self.realmResults?[indexPath.row].consumption as! String
-            pointLabel.text = "Spending: $" + consumption + ". Total point earned: " + point
+            pointLabel.text = "Spending: $" + consumption + ". Earned point: " + point
         }
         
         return cell
