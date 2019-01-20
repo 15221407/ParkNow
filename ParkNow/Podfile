@@ -9,6 +9,7 @@ target 'ParkNow' do
 pod 'RealmSwift'
 pod 'Alamofire'
 pod 'SwiftyJSON'
+pod 'BraintreeDropIn'
 
   target 'ParkNowTests' do
     inherit! :search_paths

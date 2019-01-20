@@ -18,8 +18,11 @@
 		A351A87B21C7E38800025250 /* ParkNowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351A87A21C7E38800025250 /* ParkNowTests.swift */; };
 		A351A88621C7E38800025250 /* ParkNowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351A88521C7E38800025250 /* ParkNowUITests.swift */; };
 		A393F40221CA75250011A37B /* MyAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A393F40121CA75250011A37B /* MyAccountTableViewController.swift */; };
+		A3A5E7EB21F44F22002446B3 /* MyCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A5E7EA21F44F22002446B3 /* MyCarViewController.swift */; };
+		A3A5E7ED21F44F7D002446B3 /* RegisterMyCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A5E7EC21F44F7D002446B3 /* RegisterMyCarViewController.swift */; };
 		A3AAE98821C94BF900F7A2A9 /* Mall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAE98721C94BF900F7A2A9 /* Mall.swift */; };
 		A3AAE98E21C9535B00F7A2A9 /* MallDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */; };
+		A3ACE8A921EF231B00247028 /* PrepaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ACE8A821EF231B00247028 /* PrepaymentViewController.swift */; };
 		A3B7F2ED21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2EC21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift */; };
 		A3B7F2EF21E0A25000BFBB07 /* ShoppingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */; };
 		A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */; };
@@ -64,8 +67,11 @@
 		A351A88521C7E38800025250 /* ParkNowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkNowUITests.swift; sourceTree = "<group>"; };
 		A351A88721C7E38800025250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A393F40121CA75250011A37B /* MyAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountTableViewController.swift; sourceTree = "<group>"; };
+		A3A5E7EA21F44F22002446B3 /* MyCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCarViewController.swift; sourceTree = "<group>"; };
+		A3A5E7EC21F44F7D002446B3 /* RegisterMyCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMyCarViewController.swift; sourceTree = "<group>"; };
 		A3AAE98721C94BF900F7A2A9 /* Mall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mall.swift; sourceTree = "<group>"; };
 		A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MallDetailViewController.swift; sourceTree = "<group>"; };
+		A3ACE8A821EF231B00247028 /* PrepaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaymentViewController.swift; sourceTree = "<group>"; };
 		A3B7F2EC21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingRecordTableViewController.swift; sourceTree = "<group>"; };
 		A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingRecord.swift; sourceTree = "<group>"; };
 		A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindYourCarViewController.swift; sourceTree = "<group>"; };
@@ -155,17 +161,20 @@
 				A3B7F2F221E6247600BFBB07 /* ParkNow.entitlements */,
 				A351A86321C7E38600025250 /* AppDelegate.swift */,
 				A351A86921C7E38600025250 /* Main.storyboard */,
-				A321987A21C7F66B00D7D546 /* HomeTableViewController.swift */,
 				A351A86C21C7E38700025250 /* Assets.xcassets */,
 				A351A86E21C7E38700025250 /* LaunchScreen.storyboard */,
 				A351A87121C7E38700025250 /* Info.plist */,
 				A3AAE98721C94BF900F7A2A9 /* Mall.swift */,
 				A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */,
 				A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */,
+				A321987A21C7F66B00D7D546 /* HomeTableViewController.swift */,
 				A321987C21C7F68400D7D546 /* LoginViewController.swift */,
 				A393F40121CA75250011A37B /* MyAccountTableViewController.swift */,
 				A3B7F2EC21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift */,
 				A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */,
+				A3ACE8A821EF231B00247028 /* PrepaymentViewController.swift */,
+				A3A5E7EA21F44F22002446B3 /* MyCarViewController.swift */,
+				A3A5E7EC21F44F7D002446B3 /* RegisterMyCarViewController.swift */,
 			);
 			path = ParkNow;
 			sourceTree = "<group>";
@@ -368,6 +377,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ParkNow/Pods-ParkNow-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Braintree/Braintree.framework",
+				"${BUILT_PRODUCTS_DIR}/BraintreeDropIn/BraintreeDropIn.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -375,6 +386,8 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Braintree.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BraintreeDropIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -410,10 +423,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A321987D21C7F68400D7D546 /* LoginViewController.swift in Sources */,
+				A3ACE8A921EF231B00247028 /* PrepaymentViewController.swift in Sources */,
 				A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */,
 				A321987B21C7F66B00D7D546 /* HomeTableViewController.swift in Sources */,
+				A3A5E7ED21F44F7D002446B3 /* RegisterMyCarViewController.swift in Sources */,
 				A351A86421C7E38600025250 /* AppDelegate.swift in Sources */,
 				A393F40221CA75250011A37B /* MyAccountTableViewController.swift in Sources */,
+				A3A5E7EB21F44F22002446B3 /* MyCarViewController.swift in Sources */,
 				A3AAE98821C94BF900F7A2A9 /* Mall.swift in Sources */,
 				A3B7F2ED21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift in Sources */,
 				A3B7F2EF21E0A25000BFBB07 /* ShoppingRecord.swift in Sources */,

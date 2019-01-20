@@ -23,18 +23,7 @@ class BindYourCarViewController: UIViewController {
     }
     
 
-    @IBAction func BindBtnClicked(_ sender: Any) {
-        
-        if(UserDefaults.standard.string(forKey: "username") != nil){
-            self.bindYourCar();
-        }else{
-            let alertController = UIAlertController(title: "Message", message: "Please login first.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
-        
-    }
+
     
     func bindYourCar() {
         let parameters : Parameters = ["licensePlate": licensePlateTF.text!]
