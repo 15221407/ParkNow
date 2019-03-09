@@ -12,7 +12,6 @@ import RealmSwift
 import Alamofire
 import SwiftyJSON
 
-
 class MallDateilViewController: UIViewController {
     var mallId:String = ""
     var mallName:String = ""
@@ -57,29 +56,28 @@ class MallDateilViewController: UIViewController {
     
     func setUpMap(){
         let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
-        
+
         let regionRadius: CLLocationDistance = 500
-        
+
         let coordinateRegion = MKCoordinateRegion(
             center: initialLocation.coordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
-        
+
         mapView.setRegion(coordinateRegion, animated: true)
-        
+
         let pin = MKPointAnnotation()
-        
+
         pin.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         pin.title = mallName
         pin.subtitle = "Available lots: " + self.lots!
-        
-       
-        
+
         mapView.addAnnotation(pin)
+    
     }
     
     func getLots() {
         let parameters : Parameters = ["mallName":mallName]
        
-        Alamofire.request("http://192.168.0.183:1337/mall/getLots", method: .post, parameters: parameters).responseString { response in
+        Alamofire.request(server + "mall/getLots", method: .post, parameters: parameters).responseString { response in
             print("Get Lots: \(response.result.value ?? "No data")")
             switch response.result{
             case .success(let value):
@@ -93,6 +91,21 @@ class MallDateilViewController: UIViewController {
         }
 
     }
+    
+    //redirect to google map
+    @IBAction func NavBtnClicked(_ sender: Any) {
+        
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            let urlStr = "comgooglemaps://?q=\(self.mallName)&center=\(self.latitude),\(self.longitude)&zoom=14&views=traffic"
+            if let url = URL(string: urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!){
+                print("Nav System: " + self.mallName);
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        } else {
+            print("Can't use comgooglemaps://");
+        }
+    }
+    
     /*
      // MARK: - Navigation
      

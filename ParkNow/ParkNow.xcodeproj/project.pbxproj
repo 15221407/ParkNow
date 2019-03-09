@@ -26,6 +26,8 @@
 		A3B7F2ED21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2EC21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift */; };
 		A3B7F2EF21E0A25000BFBB07 /* ShoppingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */; };
 		A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */; };
+		A3D1898C21FC96A600A9061C /* GoParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D1898B21FC96A600A9061C /* GoParkViewController.swift */; };
+		A3FDE26E22316A7B00D4EA43 /* RedemptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FDE26D22316A7B00D4EA43 /* RedemptionViewController.swift */; };
 		E3441DAD4C70C3642DF2D6DB /* Pods_ParkNowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0684CC2D42DBCBA8D42C8354 /* Pods_ParkNowTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,8 @@
 		A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingRecord.swift; sourceTree = "<group>"; };
 		A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindYourCarViewController.swift; sourceTree = "<group>"; };
 		A3B7F2F221E6247600BFBB07 /* ParkNow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ParkNow.entitlements; sourceTree = "<group>"; };
+		A3D1898B21FC96A600A9061C /* GoParkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoParkViewController.swift; sourceTree = "<group>"; };
+		A3FDE26D22316A7B00D4EA43 /* RedemptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedemptionViewController.swift; sourceTree = "<group>"; };
 		C27568936DA77987568535D1 /* Pods-ParkNowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkNowTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkNowTests/Pods-ParkNowTests.release.xcconfig"; sourceTree = "<group>"; };
 		C94BFBFDC23CB83F6850216B /* Pods-ParkNow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkNow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkNow/Pods-ParkNow.debug.xcconfig"; sourceTree = "<group>"; };
 		CA3C414ACE5CF2566C0C5F71 /* Pods_ParkNow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParkNow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +179,8 @@
 				A3ACE8A821EF231B00247028 /* PrepaymentViewController.swift */,
 				A3A5E7EA21F44F22002446B3 /* MyCarViewController.swift */,
 				A3A5E7EC21F44F7D002446B3 /* RegisterMyCarViewController.swift */,
+				A3D1898B21FC96A600A9061C /* GoParkViewController.swift */,
+				A3FDE26D22316A7B00D4EA43 /* RedemptionViewController.swift */,
 			);
 			path = ParkNow;
 			sourceTree = "<group>";
@@ -209,6 +215,7 @@
 				A351A85D21C7E38600025250 /* Frameworks */,
 				A351A85E21C7E38600025250 /* Resources */,
 				94A76179EC599AC5286AEA7E /* [CP] Embed Pods Frameworks */,
+				3405A1B8262838285A4D9908 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -369,6 +376,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3405A1B8262838285A4D9908 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ParkNow/Pods-ParkNow-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkNow/Pods-ParkNow-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		94A76179EC599AC5286AEA7E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,8 +449,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3D1898C21FC96A600A9061C /* GoParkViewController.swift in Sources */,
 				A321987D21C7F68400D7D546 /* LoginViewController.swift in Sources */,
 				A3ACE8A921EF231B00247028 /* PrepaymentViewController.swift in Sources */,
+				A3FDE26E22316A7B00D4EA43 /* RedemptionViewController.swift in Sources */,
 				A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */,
 				A321987B21C7F66B00D7D546 /* HomeTableViewController.swift in Sources */,
 				A3A5E7ED21F44F7D002446B3 /* RegisterMyCarViewController.swift in Sources */,

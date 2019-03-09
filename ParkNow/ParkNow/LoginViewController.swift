@@ -27,22 +27,19 @@ class LoginViewController: UIViewController {
     @IBAction func signinBtnClicked(_ sender: Any) {
         
         let parameters : Parameters = ["username": usernameTF.text!, "password": passwordTF.text!]
-        
-        Alamofire.request("http://192.168.0.183:1337/user/login", method: .post, parameters: parameters)
+
+        Alamofire.request(server + "user/login", method: .post, parameters: parameters)
             .responseString { response in
                 print("Response String: \(response.result.value ?? "No data")")
                 switch response.result{
                     
                 case .success(let value):
                     var json:JSON = JSON(value);
-                    
                     if(json == "Sign In Sccessfully" ){
+                        self.getUserId()
                         UserDefaults.standard.set(self.usernameTF.text!, forKey: "username")
-    
                         let alertController = UIAlertController(title: "Message", message: response.result.value, preferredStyle: .alert)
-                        
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {(alertAction)in  self.navigationController?.popToRootViewController(animated: true)}))
-                        
                         self.present(alertController, animated: true, completion: nil)
                         UIApplication.shared.registerForRemoteNotifications();
                         
@@ -53,22 +50,20 @@ class LoginViewController: UIViewController {
                     }
                 case .failure(let error):
                     break
-                    
                 }
+    }
         
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func getUserId(){
+        Alamofire.request(server + "user/getUserId", method: .get).responseString { response in
+            print("Get User Id: \(response.result.value!)")
+            UserDefaults.standard.set(response.result.value!, forKey: "userId")
+            }
+        }
     }
-    */
 
-    }}
+
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {

@@ -10,6 +10,8 @@ pod 'RealmSwift'
 pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'BraintreeDropIn'
+pod 'GoogleMaps'
+pod 'GooglePlaces'
 
   target 'ParkNowTests' do
     inherit! :search_paths

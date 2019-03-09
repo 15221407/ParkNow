@@ -9,9 +9,10 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-
 import Foundation
 import RealmSwift
+
+var server = "http://192.168.0.108:1337/" ;
 
 class HomeTableViewController: UITableViewController {
 //    var json:JSON?;
@@ -29,25 +30,18 @@ class HomeTableViewController: UITableViewController {
     func getDatafromDB(){
         
         let realm = try! Realm()
-        let url = "http://192.168.0.183:1337/mall/json"
+        let url = server + "mall/json"
 
-        
         Alamofire.request(url, method: .get).validate().responseJSON { response in
-            
             print("Mall info: \(response.result.value)") // response serialization result
-            
             switch response.result {
-                
             case .success(let value):
-                
-                //self.json = JSON(value)
                 let json:JSON = JSON(value);
                 
                 // Delete all objects from the realm
                 try! realm.write {
                     realm.deleteAll()
                 }
-                
                 for index in 0..<json.count {
                     let mall = Mall()
                     mall.mallId = json[index]["id"].stringValue
@@ -66,16 +60,11 @@ class HomeTableViewController: UITableViewController {
                     }
                 }
                 self.realmResults = realm.objects(Mall.self)
-                
                 self.tableView.reloadData()
-                
-                
             case .failure(let error):
                 print(error)
             }
         }
-        
-        
     }
     // MARK: - Table view data source
 

@@ -32,7 +32,7 @@ class ShoppingRecordTableViewController: UITableViewController {
     func getDatafromDB(){
         
         let realm = try! Realm()
-        let url = "http://192.168.0.183:1337/member/showShoppingRecord"
+        let url = server + "member/showShoppingRecord"
         
         
         Alamofire.request(url, method: .get).validate().responseJSON { response in

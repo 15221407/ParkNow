@@ -46,7 +46,7 @@ class PrepaymentViewController: UIViewController {
     
     func fetchClientToken() {
         // TODO: Switch this URL to your own authenticated API
-        let clientTokenURL = NSURL(string: "http://192.168.0.183:1337/parkingRecord/prepay")!
+        let clientTokenURL = NSURL(string: server + "parkingRecord/prepay")!
         let clientTokenRequest = NSMutableURLRequest(url: clientTokenURL as URL)
         clientTokenRequest.setValue("text/plain", forHTTPHeaderField: "Accept")
         
@@ -62,7 +62,7 @@ class PrepaymentViewController: UIViewController {
     
     func postNonceToServer(paymentMethodNonce: String) {
         // Update URL with your server
-        let paymentURL = URL(string: "http://192.168.0.183:1337/parkingRecord/paymentMethod")!
+        let paymentURL = URL(string: server + "parkingRecord/paymentMethod")!
         var request = URLRequest(url: paymentURL)
         request.httpBody = "payment_method_nonce=\(paymentMethodNonce)".data(using: String.Encoding.utf8)
         request.httpMethod = "POST"

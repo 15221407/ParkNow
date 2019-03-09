@@ -37,7 +37,7 @@ class RegisterMyCarViewController: UIViewController {
     func registerMyCar() {
         let parameters : Parameters = ["licensePlate": licensePlateTF.text!]
         
-        Alamofire.request("http://192.168.0.183:1337/car/bindYourCar", method: .post, parameters: parameters)
+        Alamofire.request(server + "car/bindYourCar", method: .post, parameters: parameters)
             .responseString { response in
                 print("Bind your car: \(response.result.value ?? "No data")")
                 switch response.result{

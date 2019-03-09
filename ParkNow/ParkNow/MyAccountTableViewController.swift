@@ -50,7 +50,7 @@ class MyAccountTableViewController: UITableViewController {
     
     func getPoint() {
 
-        Alamofire.request("http://192.168.0.183:1337/member/getPoint", method: .get).responseString { response in
+        Alamofire.request(server + "member/getPoint", method: .get).responseString { response in
             print("Get Points: \(response.result.value ?? "No data")")
             switch response.result{
             case .success(let value):
@@ -84,7 +84,7 @@ class MyAccountTableViewController: UITableViewController {
     
     
     @IBAction func accountLogout(_ sender: Any) {
-        Alamofire.request("http://192.168.0.183:1337/user/logout", method: .get).responseString { response in
+        Alamofire.request(server + "user/logout", method: .get).responseString { response in
                 print("Response String: \(response.result.value ?? "No data")")
                 switch response.result{
                 case .success(let value):
@@ -97,6 +97,7 @@ class MyAccountTableViewController: UITableViewController {
                     self.present(alertController, animated: true, completion: nil)
                     
                     UserDefaults.standard.set(nil, forKey: "username")
+                    UserDefaults.standard.set(nil, forKey: "userId")
                     self.setUpButton()
                     self.setUpLabel()
                     
@@ -127,7 +128,7 @@ class MyAccountTableViewController: UITableViewController {
         let username = UserDefaults.standard.string(forKey: "username")
         let parameters : Parameters = ["username":username!]
         
-        Alamofire.request("http://192.168.0.183:1337/user/qrCode", method: .post, parameters: parameters).responseString { response in
+        Alamofire.request(server + "user/qrCode", method: .post, parameters: parameters).responseString { response in
                 print("QR Code: \(response.result.value ?? "No data")")
                 switch response.result{
     
@@ -173,11 +174,6 @@ class MyAccountTableViewController: UITableViewController {
                     break
                 }
         }
-        
-        
-     
-      
-        
     }
     
     

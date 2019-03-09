@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 import Alamofire
 import SwiftyJSON
-
+import GoogleMaps
 import Foundation
 import RealmSwift
 
@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
         application.registerForRemoteNotifications()
         
+        GMSServices.provideAPIKey("AIzaSyCJkcvC-03pjJQRTFyOteN3_Xp2Nk6AXwc")
+//        GMSPlacesClient.provideAPIKey("AIzaSyCJkcvC-03pjJQRTFyOteN3_Xp2Nk6AXwc")
         return true
     }
     
@@ -39,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if(UserDefaults.standard.string(forKey: "username") != nil){
             let parameters : Parameters = ["token":deviceTokenString]
-            Alamofire.request("http://192.168.0.183:1337/member/saveDeviceToken", method: .post, parameters: parameters).responseString { response in
+            Alamofire.request(server + "member/saveDeviceToken", method: .post, parameters: parameters).responseString { response in
                 print("Token: \(response.result.value ?? "No data")")
             }
         }
