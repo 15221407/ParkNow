@@ -16,12 +16,12 @@ class MyCarViewController: UIViewController {
     @IBOutlet var registerBtn: UIButton!
     @IBOutlet var prepayBtn: UIButton!
     @IBOutlet var entryDateLabel: UILabel!
-    @IBOutlet var licenseLabel: UILabel!
+//    @IBOutlet var licenseLabel: UILabel!
     @IBOutlet var dateTimeLabel: UILabel!
     @IBOutlet var plateLabel: UILabel!
     @IBOutlet var parkingTimeLabel: UILabel!
     @IBOutlet var parkedTimeLabel: UILabel!
-    @IBOutlet var redeemBtn: UIButton!
+//    @IBOutlet var redeemBtn: UIButton!
     //    var timer = Timer();
     var parkingTime = 0 ;
 
@@ -33,7 +33,6 @@ class MyCarViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setUpButton()
-        print("viewWillAppear")
     }
     
     func setUpButton(){
@@ -44,14 +43,14 @@ class MyCarViewController: UIViewController {
             self.setUpLabel();
         }else{
             self.entryDateLabel.isHidden = true;
-            self.licenseLabel.isHidden = true;
+//            self.licenseLabel.isHidden = true;
             self.registerBtn.isHidden = true;
             self.prepayBtn.isHidden = true;
             self.plateLabel.isHidden = true;
             self.dateTimeLabel.isHidden = true;
             self.parkingTimeLabel.isHidden = true;
             self.parkedTimeLabel.isHidden = true;
-            self.redeemBtn.isHidden = true;
+//            self.redeemBtn.isHidden = true;
             
         }
         
@@ -60,9 +59,9 @@ class MyCarViewController: UIViewController {
    private func setUpLabel(){
         Alamofire.request(server + "parkingrecord/getLicensePlate").responseString { response in
             print("Get LicensePlate: \(response.result.value ?? "No Record")")
-            self.licenseLabel.isHidden = false;
+//            self.licenseLabel.isHidden = false;
             self.plateLabel.isHidden = false;
-            self.redeemBtn.isHidden = false;
+//            self.redeemBtn.isHidden = false;
             self.plateLabel.text = response.result.value
             
             }

@@ -12,7 +12,7 @@ import SwiftyJSON
 import Foundation
 import RealmSwift
 
-var server = "http://192.168.0.108:1337/" ;
+var server = "http://192.168.0.107:1337/" ;
 
 class HomeTableViewController: UITableViewController {
 //    var json:JSON?;

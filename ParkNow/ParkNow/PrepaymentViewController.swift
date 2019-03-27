@@ -9,69 +9,55 @@
 import UIKit
 import BraintreeDropIn
 import Braintree
+import Alamofire
+import SwiftyJSON
+import Foundation
 
 class PrepaymentViewController: UIViewController {
-
+    @IBOutlet var totalFeeLabel: UILabel!
+    @IBOutlet var parkedHourLabel: UILabel!
+    @IBOutlet var feePerHourLabel: UILabel!
+    @IBOutlet var mallLabel: UILabel!
+    @IBOutlet var parkingDetailview: UIView!
+    var feePerHour:Int = 0
+    var totalFee:Int = 0
+    var finalFee:Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fetchClientToken()
     }
     
-    func showDropIn(clientTokenOrTokenizationKey: String) {
-        let request =  BTDropInRequest()
-        let dropIn = BTDropInController(authorization: clientTokenOrTokenizationKey, request: request)
-        { (controller, result, error) in
-            if (error != nil) {
-                print("ERROR")
-            } else if (result?.isCancelled == true) {
-                print("CANCELLED")
-            } else if let result = result {
-                print("Payment Result: ")
-                print(result)
-                print(result.paymentOptionType)
-                print(result.paymentMethod!.nonce)
-                print(result.paymentIcon)
-                print(result.paymentDescription)
-                self.postNonceToServer(paymentMethodNonce: result.paymentMethod!.nonce)
-                // Use the BTDropInResult properties to update your UI
-                // result.paymentOptionType
-                // result.paymentMethod
-                // result.paymentIcon
-                // result.paymentDescription
-            }
-            controller.dismiss(animated: true, completion: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        self.setUpLabel()
+        self.resetValue()
+        self.setUpbackground()
+    }
+    
+    private func setUpbackground(){
+//        self.parkingDetailview.backgroundImage.image = UIImage(named: "RubberMat")
+    }
+    private func resetValue(){
+        self.feePerHour = 0
+        self.totalFee = 0
+        self.finalFee = 0
+    }
+    
+    private func setUpLabel(){
+        Alamofire.request(server + "parkingrecord/calculate").responseString { response in
+            print("Get Calculated Fee: \(response.result.value ?? "No Record")")
+            let json = JSON(response.result.value)//
+            var resArr = response.result.value?.components(separatedBy: ",");
+            self.totalFeeLabel.text = resArr?[0] ?? ""
+            self.totalFee = Int(resArr?[0] ?? "0")!
+            self.parkedHourLabel.text = String(resArr![1]) + "h"
+            self.feePerHourLabel.text = "$" + String(resArr![2])
+            self.feePerHour = Int(resArr?[2] ?? "0")!
+            self.mallLabel.text = resArr?[3] ?? ""
         }
-        self.present(dropIn!, animated: true, completion: nil)
-    }
-    
-    func fetchClientToken() {
-        // TODO: Switch this URL to your own authenticated API
-        let clientTokenURL = NSURL(string: server + "parkingRecord/prepay")!
-        let clientTokenRequest = NSMutableURLRequest(url: clientTokenURL as URL)
-        clientTokenRequest.setValue("text/plain", forHTTPHeaderField: "Accept")
-        
-        URLSession.shared.dataTask(with: clientTokenRequest as URLRequest) { (data, response, error) -> Void in
-            // TODO: Handle errors
-            let clientToken = String(data: data!, encoding: String.Encoding.utf8)
-            self.showDropIn(clientTokenOrTokenizationKey: clientToken ?? "");
-            }.resume()
-    
     }
     
 
-    
-    func postNonceToServer(paymentMethodNonce: String) {
-        // Update URL with your server
-        let paymentURL = URL(string: server + "parkingRecord/paymentMethod")!
-        var request = URLRequest(url: paymentURL)
-        request.httpBody = "payment_method_nonce=\(paymentMethodNonce)".data(using: String.Encoding.utf8)
-        request.httpMethod = "POST"
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
-            // TODO: Handle success or failure
-            }.resume()
-    }
-    
+
     /*
     // MARK: - Navigation
 
