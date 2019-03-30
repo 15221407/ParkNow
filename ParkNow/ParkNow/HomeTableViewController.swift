@@ -12,7 +12,7 @@ import SwiftyJSON
 import Foundation
 import RealmSwift
 
-var server = "http://192.168.0.107:1337/" ;
+var server = "http://192.168.0.104:1337/" ;
 
 class HomeTableViewController: UITableViewController {
 //    var json:JSON?;
@@ -124,7 +124,7 @@ class HomeTableViewController: UITableViewController {
                 viewController.longitude =  realmResults?[selectedIndex.row].longitude as! Double
                 viewController.address =  realmResults?[selectedIndex.row].address as! String
                 viewController.contact =  realmResults?[selectedIndex.row].contact as! String
-                 viewController.spending =  realmResults?[selectedIndex.row].spending as! Int
+                viewController.spending =  realmResults?[selectedIndex.row].spending as! Int
                 
             }
         }

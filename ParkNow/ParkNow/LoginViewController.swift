@@ -20,15 +20,22 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround() 
+        self.hideKeyboardWhenTappedAround()
+        self.setUpUI()
         // Do any additional setup after loading the view.
+    }
+    
+    private func setUpUI(){
+        
+        usernameTF.setBottomBorder()
+        passwordTF.setBottomBorder()
     }
     
     @IBAction func signinBtnClicked(_ sender: Any) {
         
         let parameters : Parameters = ["username": usernameTF.text!, "password": passwordTF.text!]
 
-        Alamofire.request(server + "user/login", method: .post, parameters: parameters)
+        Alamofire.request(server + "user/loginForApp", method: .post, parameters: parameters)
             .responseString { response in
                 print("Response String: \(response.result.value ?? "No data")")
                 switch response.result{
@@ -36,7 +43,6 @@ class LoginViewController: UIViewController {
                 case .success(let value):
                     var json:JSON = JSON(value);
                     if(json == "Sign In Sccessfully" ){
-                        self.getUserId()
                         UserDefaults.standard.set(self.usernameTF.text!, forKey: "username")
                         let alertController = UIAlertController(title: "Message", message: response.result.value, preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {(alertAction)in  self.navigationController?.popToRootViewController(animated: true)}))

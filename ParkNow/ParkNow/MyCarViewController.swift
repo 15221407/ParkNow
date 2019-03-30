@@ -15,16 +15,14 @@ import SwiftyJSON
 class MyCarViewController: UIViewController {
     @IBOutlet var registerBtn: UIButton!
     @IBOutlet var prepayBtn: UIButton!
-    @IBOutlet var entryDateLabel: UILabel!
-//    @IBOutlet var licenseLabel: UILabel!
-    @IBOutlet var dateTimeLabel: UILabel!
     @IBOutlet var plateLabel: UILabel!
-    @IBOutlet var parkingTimeLabel: UILabel!
-    @IBOutlet var parkedTimeLabel: UILabel!
-//    @IBOutlet var redeemBtn: UIButton!
-    //    var timer = Timer();
+    @IBOutlet var entryDateLabel: UILabel!
+    @IBOutlet var entryDateLabel2: UILabel!
+    @IBOutlet var enterAtLabel: UILabel!
+    @IBOutlet var enterAtLabel2: UILabel!
+    @IBOutlet var durationLabel: UILabel!
+    @IBOutlet var durationLabel2: UILabel!
     var parkingTime = 0 ;
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,59 +31,81 @@ class MyCarViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setUpButton()
+        self.setUpLabel()
     }
     
-    func setUpButton(){
+    private func setUpButton(){
         //not allow users register their car and prepay the parking fee without login
         if(UserDefaults.standard.string(forKey: "username") != nil){
             self.registerBtn.isHidden = false;
-            self.prepayBtn.isHidden = false;
-            self.setUpLabel();
+             self.prepayBtn.isHidden = true;
+            Alamofire.request(server + "parkingrecord/getParkingState").responseString { response in
+                print("Get Parking State: \(response.result.value ?? "No Record")")
+                switch response.result{
+                case .success(let value):
+                    let json:JSON = JSON(value);
+                    if(json == "enter"){
+                        self.prepayBtn.isHidden = false;
+                    }
+                case .failure(let error):
+                    break
+                }
+            }
+            
         }else{
-            self.entryDateLabel.isHidden = true;
-//            self.licenseLabel.isHidden = true;
             self.registerBtn.isHidden = true;
             self.prepayBtn.isHidden = true;
-            self.plateLabel.isHidden = true;
-            self.dateTimeLabel.isHidden = true;
-            self.parkingTimeLabel.isHidden = true;
-            self.parkedTimeLabel.isHidden = true;
-//            self.redeemBtn.isHidden = true;
-            
         }
-        
     }
     
    private func setUpLabel(){
+        self.plateLabel.text = "--";
+        self.entryDateLabel2.text = "--";
+        self.enterAtLabel2.text = "--";
+        self.durationLabel2.text = "--";
+
+    
+    
         Alamofire.request(server + "parkingrecord/getLicensePlate").responseString { response in
             print("Get LicensePlate: \(response.result.value ?? "No Record")")
-//            self.licenseLabel.isHidden = false;
-            self.plateLabel.isHidden = false;
-//            self.redeemBtn.isHidden = false;
-            self.plateLabel.text = response.result.value
-            
+            switch response.result{
+            case .success(let value):
+                let json:JSON = JSON(value);
+                if(json != "No Record"){
+                    self.plateLabel.text = value ;
+                }
+            case .failure(let error):
+                break
             }
+    }
+    
         Alamofire.request(server + "parkingrecord/getEnterAt").responseString { response in
             print("Get DateTime: \(response.result.value ?? "No Record")")
-            self.entryDateLabel.isHidden = false;
-            self.dateTimeLabel.isHidden = false;
-            self.dateTimeLabel.text = response.result.value
-            
-        }
-        
+            switch response.result{
+            case .success(let value):
+                let json:JSON = JSON(value);
+                if(json != "No Record"){
+                    var resArr = response.result.value?.components(separatedBy: ",");
+                    self.entryDateLabel2.text = resArr![0]
+                    self.enterAtLabel2.text = resArr![1]
+                }
+            case .failure(let error):
+                break
+            }
+    }
         Alamofire.request(server + "parkingrecord/getParkingTime").responseString { response in
             print("Get DateTime: \(response.result.value ?? "No Record")")
-//            self.dateTimeLabel.text = response.result.value
-            if( response.result.value != "No Record"){
-                self.setUpTimer();
-                self.parkingTime = Int(response.result.value!) ?? 0;
-                self.parkingTimeLabel.isHidden = false;
-                self.parkedTimeLabel.isHidden = false;
-                self.parkingTimeLabel.text = "loading...";
-            }else {
-                self.parkingTimeLabel.isHidden = true;
-                self.parkedTimeLabel.isHidden = true;
-                
+            switch response.result{
+            case .success(let value):
+                let json:JSON = JSON(value);
+                if(json != "No Record"){
+                    self.setUpTimer();
+                    self.parkingTime = Int(response.result.value!) ?? 0;
+                    self.durationLabel2.isHidden = false;
+                    self.durationLabel2.text = "loading...";
+                }
+            case .failure(let error):
+                break
             }
         }
     }
@@ -103,8 +123,8 @@ class MyCarViewController: UIViewController {
         var parkingTimeString = "" ;
         self.parkingTime += 1000 ;
         parkingTimeString = self.convertTime(miliseconds: self.parkingTime) ;
-        print(parkingTimeString)
-        self.parkingTimeLabel.text = parkingTimeString ;
+//        print(parkingTimeString)
+        self.durationLabel2.text = parkingTimeString ;
     }
     
     func convertTime(miliseconds: Int) -> String {
@@ -121,25 +141,25 @@ class MyCarViewController: UIViewController {
             return ""
         } else if miliseconds < 1000 * 60 {
             seconds = miliseconds / 1000
-            return "\(seconds) seconds"
+            return "0h 0m \(seconds)"
         } else if miliseconds < 1000 * 60 * 60 {
             secondsTemp = miliseconds / 1000
             minutes = secondsTemp / 60
             seconds = (miliseconds - minutes * 60 * 1000) / 1000
-            return "\(minutes) minutes \(seconds) seconds"
+            return "0h \(minutes)m \(seconds)s"
         } else if miliseconds < 1000 * 60 * 60 * 24 {
             minutesTemp = miliseconds / 1000 / 60
             hours = minutesTemp / 60
             minutes = (miliseconds - hours * 60 * 60 * 1000) / 1000 / 60
             seconds = (miliseconds - hours * 60 * 60 * 1000 - minutes * 60 * 1000) / 1000
-            return "\(hours) hours \(minutes) minutes \(seconds) seconds"
+            return "\(hours)h \(minutes)m \(seconds)s"
         } else {
             hoursTemp = miliseconds / 1000 / 60 / 60
             days = hoursTemp / 24
             hours = (miliseconds - days * 24 * 60 * 60 * 1000) / 1000 / 60 / 60
             minutes = (miliseconds - days * 24 * 60 * 60 * 1000 - hours * 60 * 60 * 1000) / 1000 / 60
             seconds = (miliseconds - days * 24 * 60 * 60 * 1000 - hours * 60 * 60 * 1000 - minutes * 60 * 1000) / 1000
-            return "\(days) days \(hours) hours \(minutes) minutes \(seconds) seconds"
+            return "\(days)d \(hours)h \(minutes)m \(seconds)s"
         }
     }
 

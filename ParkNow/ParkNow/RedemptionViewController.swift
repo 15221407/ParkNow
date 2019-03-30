@@ -24,7 +24,7 @@ class RedemptionViewController: UIViewController {
     @IBOutlet var oriFeeLabel: UILabel!
     @IBOutlet var oriPointLabel: UILabel!
     
-    var feePerHour:Int = 0
+    var pointPerHour:Int = 0
     var totalFee:Int = 0
     var finalFee:Int = 0
     var redemptionHour:Int = 0
@@ -57,28 +57,28 @@ class RedemptionViewController: UIViewController {
 
     
     private func resetValue(){
-        self.feePerHour = 0
+        self.pointPerHour = 0
         self.totalFee = 0
         self.finalFee = 0
         self.redemptionHour = 0
     }
     
     private func setUpButton(){
-        self.oneHourBtn.setTitle( "One Hour Free Parking ( " + String( 1 * feePerHour) + "points )", for: .normal)
-        self.twoHourBtn.setTitle( "Two Hour Free Parking (" + String( 2 * feePerHour) + "points )", for: .normal)
-        self.threeHourBtn.setTitle( "Three Hour Free Parking (" + String( 3 * feePerHour) + "points )", for: .normal)
+        self.oneHourBtn.setTitle( "One Hour Free Parking ( " + String( 1 * pointPerHour) + "points )", for: .normal)
+        self.twoHourBtn.setTitle( "Two Hour Free Parking (" + String( 2 * pointPerHour) + "points )", for: .normal)
+        self.threeHourBtn.setTitle( "Three Hour Free Parking (" + String( 3 * pointPerHour) + "points )", for: .normal)
         
         self.oneHourBtn.isEnabled = false
         self.twoHourBtn.isEnabled = false
         self.threeHourBtn.isEnabled = false
-        if( currentPoint >= (3 * feePerHour) && self.parkingHour >= 3 ){
+        if( currentPoint >= (3 * pointPerHour) && self.parkingHour >= 3 ){
             self.oneHourBtn.isEnabled = true
             self.twoHourBtn.isEnabled = true
             self.threeHourBtn.isEnabled = true
-        }else if( currentPoint >= (2 * feePerHour) && self.parkingHour >= 2){
+        }else if( currentPoint >= (2 * pointPerHour) && self.parkingHour >= 2){
             self.oneHourBtn.isEnabled = true
             self.twoHourBtn.isEnabled = true
-        }else{
+        }else if( currentPoint >= pointPerHour ){
             self.oneHourBtn.isEnabled = true
         }
     }
@@ -87,11 +87,11 @@ class RedemptionViewController: UIViewController {
         if(self.redemptionHour > 0 ){
             self.oriFeeLabel.isHidden = false
             self.oriFeeLabel.text = "Original fee:" + String(self.totalFee)
-            self.finalFee = self.totalFee - (self.redemptionHour * self.feePerHour)
+            self.finalFee = self.totalFee - (self.redemptionHour * self.pointPerHour)
             self.finalFeeLabel.text =  "$" + String(self.finalFee)
             self.oriPointLabel.isHidden = false
             self.oriPointLabel.text = "Original point:" + String(self.currentPoint)
-            self.myPointLabel.text = String(self.currentPoint - (self.redemptionHour * self.feePerHour) )
+            self.myPointLabel.text = String(self.currentPoint - (self.redemptionHour * self.pointPerHour) )
         }else{
             self.oriPointLabel.isHidden = true
             self.myPointLabel.text = String(self.currentPoint)
@@ -128,8 +128,8 @@ class RedemptionViewController: UIViewController {
             var resArr = response.result.value?.components(separatedBy: ",");
             self.totalFee = Int(resArr?[0] ?? "0")!
             self.parkingHour = Int(resArr?[1] ?? "0")!
-            self.feePerHour = Int(resArr?[2] ?? "0")!
-            self.finalFee = self.totalFee - (self.redemptionHour * self.feePerHour)
+            self.pointPerHour = Int(resArr?[2] ?? "0")!
+            self.finalFee = self.totalFee - (self.redemptionHour * self.pointPerHour)
             completionHandler()
         }
 
@@ -239,8 +239,8 @@ class RedemptionViewController: UIViewController {
             case .success(let value):
                 var resArr = value.components(separatedBy: ",");
                 self.totalFee = Int(resArr[0] )!
-                self.feePerHour = Int(resArr[2] )!
-                self.finalFee = self.totalFee - (self.redemptionHour * self.feePerHour)
+                self.pointPerHour = Int(resArr[2] )!
+                self.finalFee = self.totalFee - (self.redemptionHour * self.pointPerHour)
                 let alertController = UIAlertController(title: "Confirm Payment", message: "Total parking Fee: $" + String(self.finalFee), preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { action in self.fetchClientToken() }))

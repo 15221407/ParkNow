@@ -19,7 +19,7 @@ class MyAccountViewController: UIViewController {
     @IBOutlet var signInBtn: UIButton!
     @IBOutlet var helloLabel: UILabel!
     @IBOutlet var logOutbtn: UIButton!
-    
+    @IBOutlet var myPointView: UIView!
     var currentPoint:String = ""
     var currentBrightness = UIScreen.main.brightness;
     
@@ -31,23 +31,28 @@ class MyAccountViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.setUpButton()
-        self.setUpLabel()
         self.currentBrightness = UIScreen.main.brightness
-//        tableView.reloadData()
+        self.setUpUI()
     }
     
-    func setUpLabel(){
+    private func setUpUI(){
+        self.setUpButton()
+        self.setUpLabel()
+        self.myPointView.layer.borderWidth = 1
+        self.myPointView.layer.borderColor = UIColor(red:222/255, green:225/255, blue:227/255, alpha: 1).cgColor
+    }
+    
+    private func setUpLabel(){
         if(UserDefaults.standard.string(forKey: "username") != nil){
             self.getPoint()
             var username = UserDefaults.standard.string(forKey: "username")
-            self.helloLabel.text = "Hello, " + username! + "!"
+            self.helloLabel.text = username!
             self.currentPointLabel.text = self.currentPoint
             self.currentPointLabel.isHidden = false;
             self.signInBtn.isHidden = true;
             self.logOutbtn.isHidden = false;
         }else{
-            self.helloLabel.text = "Hello, visitor!"
+            self.helloLabel.text = "Visitor"
             self.signInBtn.isHidden = false;
             self.currentPointLabel.isHidden = true;
             self.logOutbtn.isHidden = true;
@@ -55,12 +60,12 @@ class MyAccountViewController: UIViewController {
     }
     
     func setUpButton(){
-        if(UserDefaults.standard.string(forKey: "username") != nil){
-            self.logOutbtn.setTitle("Sign out", for: .normal)
+        if UserDefaults.standard.string(forKey: "username") != nil {
+            self.logOutbtn.setTitle("Sign Out", for: .normal)
             self.logOutbtn.isHidden = false
             self.signInBtn.isHidden = true
-        }else if(UserDefaults.standard.string(forKey: "username") == nil){
-            self.signInBtn.setTitle("Please sign in first.", for: .normal)
+        } else if UserDefaults.standard.string(forKey: "username") == nil {
+            self.signInBtn.setTitle("Sign In", for: .normal)
             self.signInBtn.isHidden = false
             self.logOutbtn.isHidden = true
         }
@@ -68,14 +73,12 @@ class MyAccountViewController: UIViewController {
     
     
     func getPoint() {
-        
         Alamofire.request(server + "member/getPoint", method: .get).responseString { response in
             print("Get Points: \(response.result.value ?? "No data")")
             switch response.result{
             case .success(let value):
                 self.currentPoint = value
                 self.currentPointLabel.text = self.currentPoint
-//                self.tableView.reloadData();
             case .failure(let error):
                 self.currentPoint = "0"
                 break
@@ -84,31 +87,23 @@ class MyAccountViewController: UIViewController {
         
     }
     @IBAction func accountLogout(_ sender: Any) {
-        
         Alamofire.request(server + "user/logout", method: .get).responseString { response in
             print("Response String: \(response.result.value ?? "No data")")
             switch response.result{
             case .success(let value):
-                //                    var json:JSON = JSON(value);
-                
                 let alertController = UIAlertController(title: "Message", message: "Logout successfully.", preferredStyle: .alert)
-                
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-                
                 self.present(alertController, animated: true, completion: nil)
-                
                 UserDefaults.standard.set(nil, forKey: "username")
-                UserDefaults.standard.set(nil, forKey: "userId")
                 self.setUpButton()
                 self.setUpLabel()
-                
             case .failure(let error):
                 break
                 
             }
         }
     }
-    
+
     /*
     // MARK: - Navigation
 
@@ -119,4 +114,18 @@ class MyAccountViewController: UIViewController {
     }
     */
 
+}
+
+extension UITextField {
+    func setBottomBorder() {
+        self.borderStyle = .none
+        self.layer.backgroundColor = UIColor.white.cgColor
+        
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.0
+    }
+    
 }

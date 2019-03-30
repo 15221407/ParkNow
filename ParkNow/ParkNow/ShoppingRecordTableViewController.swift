@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIKit
 import Alamofire
 import SwiftyJSON
 
@@ -15,7 +14,9 @@ import Foundation
 import RealmSwift
 import CoreImage
 
+
 class ShoppingRecordTableViewController: UITableViewController {
+    @IBOutlet var segmentedControl: UISegmentedControl!
     var realmResults:Results<ShoppingRecord>?
     
     override func viewDidLoad() {
@@ -25,11 +26,11 @@ class ShoppingRecordTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData();
+       
     }
 
-
     
-    func getDatafromDB(){
+    private func getDatafromDB(){
         
         let realm = try! Realm()
         let url = server + "member/showShoppingRecord"
