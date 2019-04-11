@@ -19,11 +19,20 @@
 		A351A88621C7E38800025250 /* ParkNowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351A88521C7E38800025250 /* ParkNowUITests.swift */; };
 		A3842809224E5B0500BDEEF9 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3842808224E5B0500BDEEF9 /* Car.swift */; };
 		A384280B224EF8C000BDEEF9 /* RegisterMyCarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A384280A224EF8BF00BDEEF9 /* RegisterMyCarTableViewController.swift */; };
+		A384280D225E0E4400BDEEF9 /* Carpark.swift in Sources */ = {isa = PBXBuildFile; fileRef = A384280C225E0E4400BDEEF9 /* Carpark.swift */; };
+		A384280F225E153D00BDEEF9 /* PointRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A384280E225E153D00BDEEF9 /* PointRecord.swift */; };
+		A3842811225E155600BDEEF9 /* ParkingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3842810225E155600BDEEF9 /* ParkingRecord.swift */; };
 		A393F40221CA75250011A37B /* MyAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A393F40121CA75250011A37B /* MyAccountTableViewController.swift */; };
 		A3A5E7EB21F44F22002446B3 /* MyCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A5E7EA21F44F22002446B3 /* MyCarViewController.swift */; };
 		A3AAE98821C94BF900F7A2A9 /* Mall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAE98721C94BF900F7A2A9 /* Mall.swift */; };
 		A3AAE98E21C9535B00F7A2A9 /* MallDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */; };
 		A3ACE8A921EF231B00247028 /* PrepaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ACE8A821EF231B00247028 /* PrepaymentViewController.swift */; };
+		A3AE3D1F225E44ED0090400D /* ParkingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AE3D1D225E44ED0090400D /* ParkingTableViewCell.swift */; };
+		A3AE3D20225E44ED0090400D /* ParkingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3AE3D1E225E44ED0090400D /* ParkingTableViewCell.xib */; };
+		A3AE3D2D225E48730090400D /* ShoppingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AE3D2B225E48730090400D /* ShoppingTableViewCell.swift */; };
+		A3AE3D2E225E48730090400D /* ShoppingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3AE3D2C225E48730090400D /* ShoppingTableViewCell.xib */; };
+		A3AE3D31225E48BC0090400D /* PointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AE3D2F225E48BC0090400D /* PointTableViewCell.swift */; };
+		A3AE3D32225E48BC0090400D /* PointTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3AE3D30225E48BC0090400D /* PointTableViewCell.xib */; };
 		A3AF74BF224C7959001B2A37 /* MyRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AF74BE224C7959001B2A37 /* MyRecordTableViewController.swift */; };
 		A3B05EF1224B21D700C30D63 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B05EF0224B21D700C30D63 /* MyAccountViewController.swift */; };
 		A3B05EF3224B401600C30D63 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B05EF2224B401600C30D63 /* CreateAccountViewController.swift */; };
@@ -74,11 +83,20 @@
 		A351A88721C7E38800025250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3842808224E5B0500BDEEF9 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		A384280A224EF8BF00BDEEF9 /* RegisterMyCarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMyCarTableViewController.swift; sourceTree = "<group>"; };
+		A384280C225E0E4400BDEEF9 /* Carpark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carpark.swift; sourceTree = "<group>"; };
+		A384280E225E153D00BDEEF9 /* PointRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointRecord.swift; sourceTree = "<group>"; };
+		A3842810225E155600BDEEF9 /* ParkingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingRecord.swift; sourceTree = "<group>"; };
 		A393F40121CA75250011A37B /* MyAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountTableViewController.swift; sourceTree = "<group>"; };
 		A3A5E7EA21F44F22002446B3 /* MyCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCarViewController.swift; sourceTree = "<group>"; };
 		A3AAE98721C94BF900F7A2A9 /* Mall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mall.swift; sourceTree = "<group>"; };
 		A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MallDetailViewController.swift; sourceTree = "<group>"; };
 		A3ACE8A821EF231B00247028 /* PrepaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaymentViewController.swift; sourceTree = "<group>"; };
+		A3AE3D1D225E44ED0090400D /* ParkingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingTableViewCell.swift; sourceTree = "<group>"; };
+		A3AE3D1E225E44ED0090400D /* ParkingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParkingTableViewCell.xib; sourceTree = "<group>"; };
+		A3AE3D2B225E48730090400D /* ShoppingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingTableViewCell.swift; sourceTree = "<group>"; };
+		A3AE3D2C225E48730090400D /* ShoppingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingTableViewCell.xib; sourceTree = "<group>"; };
+		A3AE3D2F225E48BC0090400D /* PointTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTableViewCell.swift; sourceTree = "<group>"; };
+		A3AE3D30225E48BC0090400D /* PointTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PointTableViewCell.xib; sourceTree = "<group>"; };
 		A3AF74BE224C7959001B2A37 /* MyRecordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableViewController.swift; sourceTree = "<group>"; };
 		A3B05EF0224B21D700C30D63 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		A3B05EF2224B401600C30D63 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +196,10 @@
 				A351A87121C7E38700025250 /* Info.plist */,
 				A3AAE98721C94BF900F7A2A9 /* Mall.swift */,
 				A3842808224E5B0500BDEEF9 /* Car.swift */,
+				A384280C225E0E4400BDEEF9 /* Carpark.swift */,
 				A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */,
+				A3842810225E155600BDEEF9 /* ParkingRecord.swift */,
+				A384280E225E153D00BDEEF9 /* PointRecord.swift */,
 				A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */,
 				A321987A21C7F66B00D7D546 /* HomeTableViewController.swift */,
 				A321987C21C7F68400D7D546 /* LoginViewController.swift */,
@@ -190,9 +211,9 @@
 				A3A5E7EA21F44F22002446B3 /* MyCarViewController.swift */,
 				A3D1898B21FC96A600A9061C /* GoParkViewController.swift */,
 				A3FDE26D22316A7B00D4EA43 /* RedemptionViewController.swift */,
-				A3AF74BE224C7959001B2A37 /* MyRecordTableViewController.swift */,
 				A3B05EF2224B401600C30D63 /* CreateAccountViewController.swift */,
 				A384280A224EF8BF00BDEEF9 /* RegisterMyCarTableViewController.swift */,
+				A3842818225E36A900BDEEF9 /* MyRecord */,
 			);
 			path = ParkNow;
 			sourceTree = "<group>";
@@ -213,6 +234,20 @@
 				A351A88721C7E38800025250 /* Info.plist */,
 			);
 			path = ParkNowUITests;
+			sourceTree = "<group>";
+		};
+		A3842818225E36A900BDEEF9 /* MyRecord */ = {
+			isa = PBXGroup;
+			children = (
+				A3AF74BE224C7959001B2A37 /* MyRecordTableViewController.swift */,
+				A3AE3D2F225E48BC0090400D /* PointTableViewCell.swift */,
+				A3AE3D30225E48BC0090400D /* PointTableViewCell.xib */,
+				A3AE3D1D225E44ED0090400D /* ParkingTableViewCell.swift */,
+				A3AE3D1E225E44ED0090400D /* ParkingTableViewCell.xib */,
+				A3AE3D2B225E48730090400D /* ShoppingTableViewCell.swift */,
+				A3AE3D2C225E48730090400D /* ShoppingTableViewCell.xib */,
+			);
+			path = MyRecord;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,9 +364,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3AE3D32225E48BC0090400D /* PointTableViewCell.xib in Resources */,
+				A3AE3D20225E44ED0090400D /* ParkingTableViewCell.xib in Resources */,
 				A351A87021C7E38700025250 /* LaunchScreen.storyboard in Resources */,
 				A351A86D21C7E38700025250 /* Assets.xcassets in Resources */,
 				A351A86B21C7E38600025250 /* Main.storyboard in Resources */,
+				A3AE3D2E225E48730090400D /* ShoppingTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,17 +500,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3D1898C21FC96A600A9061C /* GoParkViewController.swift in Sources */,
+				A3AE3D2D225E48730090400D /* ShoppingTableViewCell.swift in Sources */,
 				A321987D21C7F68400D7D546 /* LoginViewController.swift in Sources */,
 				A3B05EF1224B21D700C30D63 /* MyAccountViewController.swift in Sources */,
 				A3AF74BF224C7959001B2A37 /* MyRecordTableViewController.swift in Sources */,
+				A3AE3D1F225E44ED0090400D /* ParkingTableViewCell.swift in Sources */,
+				A3842811225E155600BDEEF9 /* ParkingRecord.swift in Sources */,
 				A3ACE8A921EF231B00247028 /* PrepaymentViewController.swift in Sources */,
 				A3B05EF3224B401600C30D63 /* CreateAccountViewController.swift in Sources */,
 				A3FDE26E22316A7B00D4EA43 /* RedemptionViewController.swift in Sources */,
 				A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */,
+				A384280D225E0E4400BDEEF9 /* Carpark.swift in Sources */,
 				A321987B21C7F66B00D7D546 /* HomeTableViewController.swift in Sources */,
 				A384280B224EF8C000BDEEF9 /* RegisterMyCarTableViewController.swift in Sources */,
 				A351A86421C7E38600025250 /* AppDelegate.swift in Sources */,
 				A393F40221CA75250011A37B /* MyAccountTableViewController.swift in Sources */,
+				A3AE3D31225E48BC0090400D /* PointTableViewCell.swift in Sources */,
+				A384280F225E153D00BDEEF9 /* PointRecord.swift in Sources */,
 				A3A5E7EB21F44F22002446B3 /* MyCarViewController.swift in Sources */,
 				A3AAE98821C94BF900F7A2A9 /* Mall.swift in Sources */,
 				A3842809224E5B0500BDEEF9 /* Car.swift in Sources */,

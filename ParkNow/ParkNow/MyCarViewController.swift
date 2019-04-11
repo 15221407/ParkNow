@@ -43,9 +43,13 @@ class MyCarViewController: UIViewController {
                 print("Get Parking State: \(response.result.value ?? "No Record")")
                 switch response.result{
                 case .success(let value):
-                    let json:JSON = JSON(value);
-                    if(json == "enter"){
+//                    let json:JSON = JSON(value);
+                    var resArr = value.components(separatedBy: ",");
+                    if(resArr[0] == "enter" && resArr[1] == "N" ){
                         self.prepayBtn.isHidden = false;
+                    }else if (resArr[0] == "enter" && resArr[1] == "Y" ){
+                        self.prepayBtn.isHidden = false;
+                        self.prepayBtn.isEnabled = false;
                     }
                 case .failure(let error):
                     break
@@ -63,8 +67,6 @@ class MyCarViewController: UIViewController {
         self.entryDateLabel2.text = "--";
         self.enterAtLabel2.text = "--";
         self.durationLabel2.text = "--";
-
-    
     
         Alamofire.request(server + "parkingrecord/getLicensePlate").responseString { response in
             print("Get LicensePlate: \(response.result.value ?? "No Record")")
@@ -99,10 +101,10 @@ class MyCarViewController: UIViewController {
             case .success(let value):
                 let json:JSON = JSON(value);
                 if(json != "No Record"){
-                    self.setUpTimer();
+//                    self.setUpTimer();
                     self.parkingTime = Int(response.result.value!) ?? 0;
                     self.durationLabel2.isHidden = false;
-                    self.durationLabel2.text = "loading...";
+                    self.durationLabel2.text = self.convertTime(miliseconds: self.parkingTime);
                 }
             case .failure(let error):
                 break
@@ -141,7 +143,7 @@ class MyCarViewController: UIViewController {
             return ""
         } else if miliseconds < 1000 * 60 {
             seconds = miliseconds / 1000
-            return "0h 0m \(seconds)"
+            return "0h 0m \(seconds)s"
         } else if miliseconds < 1000 * 60 * 60 {
             secondsTemp = miliseconds / 1000
             minutes = secondsTemp / 60

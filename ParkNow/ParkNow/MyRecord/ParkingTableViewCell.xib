@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.30.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.19.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="ParkingTableViewCell" customModule="ParkNow" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e1P-ih-ZMN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="075-Z6-XRr">
+                                <rect key="frame" x="25" y="38.5" width="287" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="287" id="0QE-w3-XGs"/>
+                                    <constraint firstAttribute="height" constant="21" id="Tdn-K7-9kb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gd8-ls-1JM">
+                                <rect key="frame" x="25" y="67.5" width="25" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="Ajm-Fk-XDm"/>
+                                    <constraint firstAttribute="height" constant="24" id="Cgm-Dz-fIF"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k2M-Qd-e2h">
+                                <rect key="frame" x="166" y="67.5" width="27" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="eoJ-xB-NUT"/>
+                                    <constraint firstAttribute="width" constant="27" id="wlS-bY-Cej"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMd-bj-CeW">
+                                <rect key="frame" x="60" y="69" width="139" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="NoV-sZ-XFg"/>
+                                    <constraint firstAttribute="width" constant="139" id="o1j-ml-vch"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMt-vV-Ncz">
+                                <rect key="frame" x="201" y="69" width="111" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="111" id="V3P-9J-5kQ"/>
+                                    <constraint firstAttribute="height" constant="21" id="W7b-uQ-KQi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="k2M-Qd-e2h" firstAttribute="centerY" secondItem="SMd-bj-CeW" secondAttribute="centerY" id="8aR-Dh-3E9"/>
+                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="bottom" secondItem="e1P-ih-ZMN" secondAttribute="bottomMargin" id="9qa-Vk-ASh"/>
+                            <constraint firstItem="075-Z6-XRr" firstAttribute="trailing" secondItem="BMt-vV-Ncz" secondAttribute="trailing" id="Gl8-Qx-KA6"/>
+                            <constraint firstItem="SMd-bj-CeW" firstAttribute="centerY" secondItem="Gd8-ls-1JM" secondAttribute="centerY" id="JPf-QD-4GA"/>
+                            <constraint firstItem="BMt-vV-Ncz" firstAttribute="leading" secondItem="k2M-Qd-e2h" secondAttribute="trailing" constant="8" symbolic="YES" id="KQz-Js-Mz7"/>
+                            <constraint firstItem="BMt-vV-Ncz" firstAttribute="centerY" secondItem="SMd-bj-CeW" secondAttribute="centerY" id="Mdd-4v-V1q"/>
+                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="leading" secondItem="075-Z6-XRr" secondAttribute="leading" id="aqu-IM-5on"/>
+                            <constraint firstItem="SMd-bj-CeW" firstAttribute="leading" secondItem="Gd8-ls-1JM" secondAttribute="trailing" constant="10" id="iSb-IQ-iJP"/>
+                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="top" secondItem="075-Z6-XRr" secondAttribute="bottom" constant="8" symbolic="YES" id="xUj-nQ-7O9"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btk-DI-VGr">
+                        <rect key="frame" x="25" y="18" width="148" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="148" id="abx-qO-WUm"/>
+                            <constraint firstAttribute="height" constant="21" id="dd7-SE-V6f"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="OriyaSangamMN-Bold" family="Oriya Sangam MN" pointSize="15"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEe-ns-k1q">
+                        <rect key="frame" x="167" y="18" width="148" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="148" id="9Xv-DV-1oa"/>
+                            <constraint firstAttribute="height" constant="21" id="pzl-fr-hHt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Btk-DI-VGr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="3rI-YH-tf4"/>
+                    <constraint firstItem="e1P-ih-ZMN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7ra-CJ-CBi"/>
+                    <constraint firstItem="rEe-ns-k1q" firstAttribute="baseline" secondItem="Btk-DI-VGr" secondAttribute="baseline" id="C1x-OH-o5D"/>
+                    <constraint firstItem="e1P-ih-ZMN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GwG-qn-kO7"/>
+                    <constraint firstItem="Btk-DI-VGr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="HrL-3b-2Oa"/>
+                    <constraint firstAttribute="bottom" secondItem="e1P-ih-ZMN" secondAttribute="bottom" id="IMj-gh-nlD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="rEe-ns-k1q" secondAttribute="trailing" constant="-11" id="Wiq-YR-hAz"/>
+                    <constraint firstAttribute="trailing" secondItem="e1P-ih-ZMN" secondAttribute="trailing" id="aD7-H1-QcV"/>
+                    <constraint firstItem="Btk-DI-VGr" firstAttribute="leading" secondItem="075-Z6-XRr" secondAttribute="leading" id="dNI-lu-abq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="carparkLabel" destination="075-Z6-XRr" id="z7P-MZ-LET"/>
+                <outlet property="dateLabel" destination="Btk-DI-VGr" id="sGJ-D9-Men"/>
+                <outlet property="inLabel" destination="SMd-bj-CeW" id="3Ol-Vz-ek6"/>
+                <outlet property="licenseLabel" destination="rEe-ns-k1q" id="ZEX-go-nYp"/>
+                <outlet property="outLabel" destination="BMt-vV-Ncz" id="2Lg-Ag-z55"/>
+            </connections>
+            <point key="canvasLocation" x="1036.8" y="450.67466266866569"/>
+        </tableViewCell>
+    </objects>
+</document>

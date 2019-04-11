@@ -19,11 +19,12 @@ class GoParkViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var tableView: UITableView!
     
-    var realmResults:Results<Mall>?
+    var realmResults:Results<Carpark>?
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.isHidden = true;
         self.hideKeyboardWhenTappedAround()
 //        self.setUpScrollView()
         self.findNearestCarPark()
@@ -40,9 +41,8 @@ class GoParkViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func getDatafromDB(){
         let realm = try! Realm()
-        let url = server + "mall/json"
         
-        Alamofire.request(url, method: .get).validate().responseJSON { response in
+        Alamofire.request(server + "carpark/json", method: .get).validate().responseJSON { response in
             print("Car Park info: \(response.result.value)") // response serialization result
             switch response.result {
             case .success(let value):
@@ -53,20 +53,21 @@ class GoParkViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     realm.deleteAll()
                 }
                 for index in 0..<json.count {
-                    let mall = Mall()
-                    mall.mallId = json[index]["id"].stringValue
-                    mall.name = json[index]["name"].stringValue
-                    mall.district = json[index]["district"].stringValue
-                    mall.address = json[index]["address"].stringValue
-                    mall.parkingFee = json[index]["parkingFee"].stringValue
-                    mall.spending = json[index]["spending"].intValue
-                    mall.longitude = json[index]["longitude"].doubleValue
-                    mall.latitude = json[index]["latitude"].doubleValue
+                    let carpark = Carpark()
+                    carpark.mallId = json[index]["mallId"].stringValue
+                    carpark.mallName = json[index]["mallName"].stringValue
+                    carpark.carparkId = json[index]["carparkId"].stringValue
+                    carpark.carparkName = json[index]["carparkName"].stringValue
+                    carpark.district = json[index]["district"].stringValue
+                    carpark.parkingFee = json[index]["parkingFee"].intValue
+                    carpark.peakHourFee = json[index]["peakHourFee"].intValue
+                    carpark.longitude = json[index]["longitude"].doubleValue
+                    carpark.latitude = json[index]["latitude"].doubleValue
                     try! realm.write {
-                        realm.add(mall)
+                        realm.add(carpark)
                     }
                 }
-                self.realmResults = realm.objects(Mall.self)
+                self.realmResults = realm.objects(Carpark.self)
             case .failure(let error):
                 print(error)
             }
@@ -78,7 +79,7 @@ class GoParkViewController: UIViewController, UITableViewDelegate, UITableViewDa
             else {
             return
         }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        print("My mlocations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     func findNearestCarPark(){
@@ -96,8 +97,6 @@ class GoParkViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
     }
-    
- 
     
     
     func setUpMap(){

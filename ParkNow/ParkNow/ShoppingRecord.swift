@@ -15,5 +15,6 @@ class ShoppingRecord: Object {
     @objc dynamic var shopName: String? = nil
     @objc dynamic var consumption: String? = nil
     @objc dynamic var point: String? = nil
+    @objc dynamic var addAt: String? = nil
 }
 

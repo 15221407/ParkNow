@@ -104,6 +104,74 @@ class MyAccountViewController: UIViewController {
         }
     }
 
+    @IBAction func qrCodeClicked(_ sender: Any) {
+        if(UserDefaults.standard.string(forKey: "username") != nil){
+            self.getQRCode()
+        }else{
+            let alertController = UIAlertController(title: "ParkNow", message: "Please login first.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func closeQrcode(){
+        UIScreen.main.brightness = self.currentBrightness
+        self.getPoint()
+    }
+    
+    func getQRCode(){
+
+        Alamofire.request(server + "member/genQRCode", method: .get).responseString { response in
+            print("QR Code: \(response.result.value ?? "No data")")
+            switch response.result{
+            case .success(let value):
+                var json:JSON = JSON(value);
+                if(json == "No such user"){
+                    let alertController = UIAlertController(title: "ParkNow", message: response.result.value, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                }else{
+                    let currentDateTime = Date()
+                    
+                    // initialize the date formatter and set the style
+                    let formatter = DateFormatter()
+                    formatter.timeStyle = .medium
+                    formatter.dateStyle = .medium
+                    
+                    // get the date time String from the date object
+                    let timeString = "Updated at " + formatter.string(from: currentDateTime)
+                    let alertController = UIAlertController(title: "QR Code", message: timeString, preferredStyle: .alert)
+                    
+                    //set imageView for QR Code
+                    let imageView = UIImageView(frame: CGRect(x: 10, y: 90, width: 250, height: 250))
+                    let imageUrl = URL(string:response.result.value! )!
+                    let imageData = try! Data(contentsOf: imageUrl)
+                    imageView.image = UIImage(data: imageData, scale:1)
+                    alertController.view.addSubview(imageView)
+                    
+                    //add height
+                    var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.58)
+                    alertController.view.addConstraint(height);
+                    
+                    //refresh button
+                    let refreshAction = UIAlertAction(title: "Refresh", style: .default, handler: {( alertController: UIAlertAction?) in self.getQRCode()})
+                    alertController.addAction(refreshAction)
+                    
+                    //cancel button
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { ( alertController: UIAlertAction?) in self.closeQrcode() })
+                    alertController.addAction(cancelAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    //adjust the brightness
+                    UIScreen.main.brightness = CGFloat(1)
+                }
+            case .failure(let error):
+                break
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

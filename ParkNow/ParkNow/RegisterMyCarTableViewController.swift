@@ -15,6 +15,7 @@ import RealmSwift
 class tableViewCell:UITableViewCell{
     @IBOutlet var myCarLabel: UILabel!
     @IBOutlet var removeBtn: UIButton!
+    @IBOutlet var noCarLabel: UILabel!
     
 }
 
@@ -22,19 +23,21 @@ class RegisterMyCarTableViewController: UITableViewController {
     @IBOutlet var licenseTF: UITextField!
     @IBOutlet var warningLabel: UILabel!
     @IBOutlet var registerBtn: UIButton!
+    var noCar:Bool = false
     
     
     var realmResults:Results<Car>?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getCar()
         self.hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.getCar()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         self.warningLabel.isHidden = true
-        self.tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -109,16 +112,19 @@ class RegisterMyCarTableViewController: UITableViewController {
                         let alertController = UIAlertController(title: "ParkNow", message: response.result.value, preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                         self.present(alertController, animated: true, completion: nil)
+                        self.licenseTF.text = ""
+                        self.getCar()
                     }else{
                         let alertController = UIAlertController(title: "ParkNow", message: response.result.value, preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                         self.present(alertController, animated: true, completion: nil)
+                        self.getCar()
+                        
                     }
                     self.registerBtn.isEnabled = true
                 case .failure(let error):
                     break
                 }
-                self.tableView.reloadData()
         }
     }
     
@@ -130,10 +136,23 @@ class RegisterMyCarTableViewController: UITableViewController {
                 print("Remove car: \(response.result.value ?? "No data")")
                 switch response.result{
                 case .success(let value):
-                    self.tableView.reloadData()
+                    var json:JSON = JSON(value);
+                    if(json == "Successfully Removed." ){
+                        let alertController = UIAlertController(title: "ParkNow", message: response.result.value, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                        self.getCar()
+                    }else{
+                        let alertController = UIAlertController(title: "ParkNow", message: response.result.value, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                        self.getCar()
+                        
+                    }
                 case .failure(let error):
                     break
                 }
+                
         }
     }
     
@@ -152,7 +171,13 @@ class RegisterMyCarTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let r = realmResults {
-            return r.count
+            if r.count == 0 {
+                self.noCar = true
+                return 1
+            }else{
+                self.noCar = false
+                return r.count
+            }
         } else {
             return 0
         }
@@ -160,9 +185,21 @@ class RegisterMyCarTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "carCell", for: indexPath) as! tableViewCell
-        print(self.realmResults?[indexPath.row].licensePlate! ?? "")
-        cell.myCarLabel.text  = self.realmResults?[indexPath.row].licensePlate
-        cell.removeBtn.tag = indexPath.row;
+        
+        if self.noCar {
+            cell.removeBtn.isHidden = true;
+            cell.noCarLabel.isHidden = false;
+            cell.myCarLabel.isHidden = true;
+            cell.noCarLabel.text  = "No Car"
+        }else{
+            cell.removeBtn.isHidden = false;
+            cell.noCarLabel.isHidden = true;
+            cell.myCarLabel.isHidden = false;
+            print(self.realmResults?[indexPath.row].licensePlate! ?? "")
+            cell.myCarLabel.text  = self.realmResults?[indexPath.row].licensePlate
+            cell.myCarLabel.text  = self.realmResults?[indexPath.row].licensePlate
+            cell.removeBtn.tag = indexPath.row;
+        }
         return cell
     }
 

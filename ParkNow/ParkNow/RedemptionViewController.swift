@@ -173,12 +173,9 @@ class RedemptionViewController: UIViewController {
         URLSession.shared.dataTask(with: clientTokenRequest as URLRequest) { (data, response, error) -> Void in
             // TODO: Handle errors
             let clientToken = String(data: data!, encoding: String.Encoding.utf8)
-            self.showDropIn(clientTokenOrTokenizationKey: clientToken ?? "");
+            self.showDropIn(clientTokenOrTokenizationKey: clientToken ?? "")
             }.resume()
-        
     }
-    
-    
     
     func postNonceToServer(paymentMethodNonce: String) {
         let paymentURL = URL(string: server + "parkingRecord/calculateBeforePay")!
@@ -188,8 +185,13 @@ class RedemptionViewController: UIViewController {
         
         URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
             // TODO: Handle success or failure
-            if(response != nil){
-                print(response)
+            let result = String(data: data!, encoding: String.Encoding.utf8)
+            print("Prepayment result: \(result ?? "No data")")
+            if(result == "Charged succefully"){
+                let alertController = UIAlertController(title: "Confirm Payment", message: "You have paid $" + String(self.finalFee), preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {(alertAction)in  self.navigationController?.popToRootViewController(animated: true)}))
+                self.present(alertController, animated: true, completion: nil)
+                self.finalFee = 0 ;
             }
             }.resume()
     }
@@ -259,6 +261,16 @@ class RedemptionViewController: UIViewController {
         return attributeString
     }
     
+    @IBAction func cancalBtnClicked(_ sender: Any) {
+        if self.presentingViewController != nil {
+            self.dismiss(animated: false, completion: {
+                self.navigationController!.popToRootViewController(animated: true)
+            })
+        }
+        else {
+            self.navigationController!.popToRootViewController(animated: true)
+        }
+    }
     /*
     // MARK: - Navigation
 
