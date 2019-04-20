@@ -13,17 +13,21 @@ import Foundation
 import RealmSwift
 
 
+
+
 class MyRecordTableViewController: UITableViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     var shoppingRealmResults:Results<ShoppingRecord>?
     var pointRealmResults:Results<PointRecord>?
     var parkingRealmResults:Results<ParkingRecord>?
+    var underlineBar = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.segmentedControl.selectedSegmentIndex = 0
+//        self.segmentedControl.selectedSegmentIndex = 0
         self.registerNib();
+        self.setSegmentedControlStyle()
         if(UserDefaults.standard.string(forKey: "username") != nil){
             self.getShoppingRecord();
             self.getPointRecord();
@@ -42,6 +46,35 @@ class MyRecordTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    private func setSegmentedControlStyle(){
+        // Add lines below selectedSegmentIndex
+        self.segmentedControl.backgroundColor = .clear
+        self.segmentedControl.tintColor = .clear
+        
+        // Add lines below the segmented control's tintColor
+        segmentedControl.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 20),
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray
+            ], for: .normal)
+        
+        segmentedControl.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 20),
+            NSAttributedString.Key.foregroundColor: UIColor.orange
+            ], for: .selected)
+        
+//        
+//        underlineBar.translatesAutoresizingMaskIntoConstraints = false // false since we are using auto layout constraints
+//        underlineBar.backgroundColor = UIColor.orange
+//        view.addSubview(underlineBar)
+//        
+//        underlineBar.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
+//        underlineBar.heightAnchor.constraint(equalToConstant: 5).isActive = true
+//        underlineBar.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor, multiplier: 1 / CGFloat(segmentedControl.numberOfSegments)).isActive = true
+//        
+
+    }
+
     private func registerNib(){
             tableView.register(UINib(nibName: "PointTableViewCell", bundle: nil), forCellReuseIdentifier: "PointTableViewCell")
             tableView.register(UINib(nibName: "ShoppingTableViewCell", bundle: nil), forCellReuseIdentifier: "ShoppingTableViewCell")
@@ -233,6 +266,14 @@ class MyRecordTableViewController: UITableViewController {
     }
     
     @IBAction func segmentedControlActionChanged(sender: AnyObject) {
+        UIView.animate(withDuration: 0.3) {
+            print("self.segmentedControl.selectedSegmentIndex")
+            print(self.segmentedControl.selectedSegmentIndex)
+            print(self.segmentedControl.numberOfSegments)
+            print(self.segmentedControl.frame.width)
+            self.underlineBar.frame.origin.x = (self.segmentedControl.frame.width / CGFloat(self.segmentedControl.numberOfSegments)) * CGFloat(self.segmentedControl.selectedSegmentIndex)
+        }
+        
         self.tableView.reloadData();
         switch(self.segmentedControl.selectedSegmentIndex){
         case 0:

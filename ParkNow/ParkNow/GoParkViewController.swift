@@ -14,34 +14,61 @@ import RealmSwift
 import MapKit
 import CoreLocation
 
+
+struct Carparks {
+    var carparkId:String
+    var mallName:String
+    var carparkName:String
+    var longitude: Double
+    var latitude: Double
+    
+}
+
+struct Nearest {
+    var carparkId:String
+    var mallName:String
+    var carparkName:String
+    var distance:Double
+}
+
 class GoParkViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var tableView: UITableView!
     
     var realmResults:Results<Carpark>?
+    var carparkArr = [Carparks]()
+    var nearestArr = [Nearest]()
+    var myLongitude:Double = 0;
+    var myLatitude:Double = 0;
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.isHidden = true;
         self.hideKeyboardWhenTappedAround()
-//        self.setUpScrollView()
-        self.findNearestCarPark()
+        self.setUplocationManager()
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.setUpScrollView()
+        self.getCarpark()
+        self.mapView.isHidden = false;
     }
     
     func setUpScrollView(){
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        scrollView.delegate = self;
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.scrollView.delegate = self;
         self.tableView.isScrollEnabled = true
         self.scrollView.bounces = false
         self.tableView.bounces = true
     }
     
-    func getDatafromDB(){
+    func getCarpark(){
         let realm = try! Realm()
-        
         Alamofire.request(server + "carpark/json", method: .get).validate().responseJSON { response in
             print("Car Park info: \(response.result.value)") // response serialization result
             switch response.result {
@@ -63,10 +90,21 @@ class GoParkViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     carpark.peakHourFee = json[index]["peakHourFee"].intValue
                     carpark.longitude = json[index]["longitude"].doubleValue
                     carpark.latitude = json[index]["latitude"].doubleValue
+//                    carpark.lots = json[index]["lots"].intValue
+                    
+                    self.carparkArr.append(
+                        Carparks(
+                        carparkId: "\(String(describing: carpark.carparkId))",
+                        mallName: "\(String(describing: carpark.mallName))",
+                        carparkName: "\(String(describing: carpark.carparkName))",
+                        longitude: carpark.longitude ,
+                        latitude: carpark.latitude)
+                    )
                     try! realm.write {
                         realm.add(carpark)
                     }
                 }
+                self.findNearestCarPark()
                 self.realmResults = realm.objects(Carpark.self)
             case .failure(let error):
                 print(error)
@@ -79,40 +117,76 @@ class GoParkViewController: UIViewController, UITableViewDelegate, UITableViewDa
             else {
             return
         }
-        print("My mlocations = \(locValue.latitude) \(locValue.longitude)")
+        self.myLatitude = locValue.latitude ;
+        self.myLongitude = locValue.longitude ;
+        print("My locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     func findNearestCarPark(){
+        //My location
+        let myLocation = CLLocation(latitude: self.myLatitude, longitude: self.myLongitude)
         
-        // Ask for Authorisation from the User.
-        self.locationManager.requestAlwaysAuthorization()
-        
-        // For use in foreground
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            self.locationManager.startUpdatingLocation()
+        for carpark in carparkArr{
+            let carparkLocation = CLLocation(latitude: carpark.latitude , longitude: carpark.longitude)
+  
+            let regionRadius: CLLocationDistance = 900
+            let coordinateRegion = MKCoordinateRegion(
+                center: carparkLocation.coordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+            mapView.setRegion(coordinateRegion, animated: true)
+            
+            //Measuring my distance to carpark
+            let distance = myLocation.distance(from: carparkLocation) / 1000
+            //Display the result in km
+            print(String(format: "The distance to \(carpark.mallName) is %.01fkm", distance))
+            
+            if( distance < 3 ){
+                let pin = MKPointAnnotation()
+                pin.coordinate = CLLocationCoordinate2D(latitude: carpark.latitude , longitude: carpark.longitude)
+                pin.title = carpark.mallName + "-" + carpark.carparkName
+                pin.subtitle = "Available lots: "
+                mapView.addAnnotation(pin)
+                
+                self.nearestArr.append(
+                    Nearest(
+                        carparkId: "\(String(describing: carpark.carparkId))",
+                        mallName: "\(String(describing: carpark.mallName))",
+                        carparkName: "\(String(describing: carpark.carparkName))",
+                        distance: distance
+                    )
+                )
+            }
         }
-        
+        self.tableView.reloadData()
     }
     
-    
-    func setUpMap(){
-        
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
     }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return nearestArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nearestCell", for: indexPath)
-        cell.textLabel?.text = "Row: \(indexPath.row+1)"
+        cell.textLabel?.text = String(nearestArr[indexPath.row].mallName)
         return cell
     }
 
+    private func setUplocationManager(){
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        self.locationManager.startUpdatingLocation()
+    }
+    }
+    
     /*
     // MARK: - Navigation
 

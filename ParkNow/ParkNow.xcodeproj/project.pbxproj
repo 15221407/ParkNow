@@ -40,6 +40,9 @@
 		A3B7F2EF21E0A25000BFBB07 /* ShoppingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */; };
 		A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */; };
 		A3D1898C21FC96A600A9061C /* GoParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D1898B21FC96A600A9061C /* GoParkViewController.swift */; };
+		A3F535FF226AC32400506542 /* mallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F535FE226AC32400506542 /* mallCollectionViewCell.swift */; };
+		A3F53601226B36D000506542 /* MallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F53600226B36D000506542 /* MallViewController.swift */; };
+		A3F53603226B852F00506542 /* PosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F53602226B852F00506542 /* PosterViewController.swift */; };
 		A3FDE26E22316A7B00D4EA43 /* RedemptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FDE26D22316A7B00D4EA43 /* RedemptionViewController.swift */; };
 		E3441DAD4C70C3642DF2D6DB /* Pods_ParkNowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0684CC2D42DBCBA8D42C8354 /* Pods_ParkNowTests.framework */; };
 /* End PBXBuildFile section */
@@ -105,6 +108,9 @@
 		A3B7F2F021E1DA4000BFBB07 /* BindYourCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindYourCarViewController.swift; sourceTree = "<group>"; };
 		A3B7F2F221E6247600BFBB07 /* ParkNow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ParkNow.entitlements; sourceTree = "<group>"; };
 		A3D1898B21FC96A600A9061C /* GoParkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoParkViewController.swift; sourceTree = "<group>"; };
+		A3F535FE226AC32400506542 /* mallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mallCollectionViewCell.swift; sourceTree = "<group>"; };
+		A3F53600226B36D000506542 /* MallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MallViewController.swift; sourceTree = "<group>"; };
+		A3F53602226B852F00506542 /* PosterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterViewController.swift; sourceTree = "<group>"; };
 		A3FDE26D22316A7B00D4EA43 /* RedemptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedemptionViewController.swift; sourceTree = "<group>"; };
 		C27568936DA77987568535D1 /* Pods-ParkNowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkNowTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkNowTests/Pods-ParkNowTests.release.xcconfig"; sourceTree = "<group>"; };
 		C94BFBFDC23CB83F6850216B /* Pods-ParkNow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkNow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkNow/Pods-ParkNow.debug.xcconfig"; sourceTree = "<group>"; };
@@ -200,8 +206,7 @@
 				A3B7F2EE21E0A25000BFBB07 /* ShoppingRecord.swift */,
 				A3842810225E155600BDEEF9 /* ParkingRecord.swift */,
 				A384280E225E153D00BDEEF9 /* PointRecord.swift */,
-				A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */,
-				A321987A21C7F66B00D7D546 /* HomeTableViewController.swift */,
+				A3F535FD226ABB6900506542 /* Homepage */,
 				A321987C21C7F68400D7D546 /* LoginViewController.swift */,
 				A393F40121CA75250011A37B /* MyAccountTableViewController.swift */,
 				A3B05EF0224B21D700C30D63 /* MyAccountViewController.swift */,
@@ -248,6 +253,18 @@
 				A3AE3D2C225E48730090400D /* ShoppingTableViewCell.xib */,
 			);
 			path = MyRecord;
+			sourceTree = "<group>";
+		};
+		A3F535FD226ABB6900506542 /* Homepage */ = {
+			isa = PBXGroup;
+			children = (
+				A321987A21C7F66B00D7D546 /* HomeTableViewController.swift */,
+				A3F535FE226AC32400506542 /* mallCollectionViewCell.swift */,
+				A3F53600226B36D000506542 /* MallViewController.swift */,
+				A3AAE98D21C9535B00F7A2A9 /* MallDetailViewController.swift */,
+				A3F53602226B852F00506542 /* PosterViewController.swift */,
+			);
+			path = Homepage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,6 +524,7 @@
 				A3AE3D1F225E44ED0090400D /* ParkingTableViewCell.swift in Sources */,
 				A3842811225E155600BDEEF9 /* ParkingRecord.swift in Sources */,
 				A3ACE8A921EF231B00247028 /* PrepaymentViewController.swift in Sources */,
+				A3F53601226B36D000506542 /* MallViewController.swift in Sources */,
 				A3B05EF3224B401600C30D63 /* CreateAccountViewController.swift in Sources */,
 				A3FDE26E22316A7B00D4EA43 /* RedemptionViewController.swift in Sources */,
 				A3B7F2F121E1DA4000BFBB07 /* BindYourCarViewController.swift in Sources */,
@@ -518,9 +536,11 @@
 				A3AE3D31225E48BC0090400D /* PointTableViewCell.swift in Sources */,
 				A384280F225E153D00BDEEF9 /* PointRecord.swift in Sources */,
 				A3A5E7EB21F44F22002446B3 /* MyCarViewController.swift in Sources */,
+				A3F53603226B852F00506542 /* PosterViewController.swift in Sources */,
 				A3AAE98821C94BF900F7A2A9 /* Mall.swift in Sources */,
 				A3842809224E5B0500BDEEF9 /* Car.swift in Sources */,
 				A3B7F2ED21E0A0AA00BFBB07 /* ShoppingRecordTableViewController.swift in Sources */,
+				A3F535FF226AC32400506542 /* mallCollectionViewCell.swift in Sources */,
 				A3B7F2EF21E0A25000BFBB07 /* ShoppingRecord.swift in Sources */,
 				A3AAE98E21C9535B00F7A2A9 /* MallDetailViewController.swift in Sources */,
 			);

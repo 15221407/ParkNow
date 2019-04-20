@@ -22,7 +22,9 @@ class MyCarViewController: UIViewController {
     @IBOutlet var enterAtLabel2: UILabel!
     @IBOutlet var durationLabel: UILabel!
     @IBOutlet var durationLabel2: UILabel!
+    @IBOutlet var whereBtn: UIButton!
     var parkingTime = 0 ;
+    var licensePlate: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +36,54 @@ class MyCarViewController: UIViewController {
         self.setUpLabel()
     }
     
+    @IBAction func whereBtnClicked(_ sender: Any) {
+            let parameters : Parameters = ["licensePlate": self.licensePlate]
+         Alamofire.request(server + "RFIDTag/getLocation", method: .post, parameters: parameters).responseString { response in
+            print("Get Location: \(response.result.value ?? "No Record")")
+            switch response.result{
+            case .success(let value):
+                
+                if (value == "Please register a tag first."){
+                     let alertController = UIAlertController(title: "Where's My Car", message: value, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                }else{
+                    //set imageView for map
+                    let imageView = UIImageView(frame: CGRect(x: 20, y: 90, width: 220, height: 220))
+                    let alertController = UIAlertController(title: "Where's My Car", message: "My car is at " + value, preferredStyle: .alert)
+                    if( value == "entrance"){
+                        imageView.image = UIImage(named: "none")
+                    }else if (value == "zoneA"){
+                        imageView.image = UIImage(named: "zoneA")
+                    }
+                     alertController.view.addSubview(imageView)
+                    
+                    //add height
+                    var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.58)
+                    alertController.view.addConstraint(height);
+                    
+                    //cancel button
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                    alertController.addAction(cancelAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+            case .failure(let error):
+                break
+            }
+        }
+    }
+    
+    
     private func setUpButton(){
         //not allow users register their car and prepay the parking fee without login
         if(UserDefaults.standard.string(forKey: "username") != nil){
             self.registerBtn.isHidden = false;
-             self.prepayBtn.isHidden = true;
+            self.prepayBtn.isHidden = true;
+            self.whereBtn.isHidden = true;
             Alamofire.request(server + "parkingrecord/getParkingState").responseString { response in
                 print("Get Parking State: \(response.result.value ?? "No Record")")
                 switch response.result{
@@ -47,9 +92,11 @@ class MyCarViewController: UIViewController {
                     var resArr = value.components(separatedBy: ",");
                     if(resArr[0] == "enter" && resArr[1] == "N" ){
                         self.prepayBtn.isHidden = false;
+                        self.whereBtn.isHidden = false;
                     }else if (resArr[0] == "enter" && resArr[1] == "Y" ){
                         self.prepayBtn.isHidden = false;
                         self.prepayBtn.isEnabled = false;
+                        self.whereBtn.isHidden = false;
                     }
                 case .failure(let error):
                     break
@@ -59,55 +106,60 @@ class MyCarViewController: UIViewController {
         }else{
             self.registerBtn.isHidden = true;
             self.prepayBtn.isHidden = true;
+            self.whereBtn.isHidden = true;
         }
     }
     
    private func setUpLabel(){
+        self.licensePlate = "";
         self.plateLabel.text = "--";
         self.entryDateLabel2.text = "--";
         self.enterAtLabel2.text = "--";
         self.durationLabel2.text = "--";
     
-        Alamofire.request(server + "parkingrecord/getLicensePlate").responseString { response in
-            print("Get LicensePlate: \(response.result.value ?? "No Record")")
-            switch response.result{
-            case .success(let value):
-                let json:JSON = JSON(value);
-                if(json != "No Record"){
-                    self.plateLabel.text = value ;
+        if(UserDefaults.standard.string(forKey: "username") != nil){
+            Alamofire.request(server + "parkingrecord/getLicensePlate").responseString { response in
+                print("Get LicensePlate: \(response.result.value ?? "No Record")")
+                switch response.result{
+                case .success(let value):
+                    let json:JSON = JSON(value);
+                    if(json != "No Record"){
+                        self.plateLabel.text = value ;
+                        self.licensePlate = value;
+                    }
+                case .failure(let error):
+                    break
                 }
-            case .failure(let error):
-                break
-            }
-    }
-    
-        Alamofire.request(server + "parkingrecord/getEnterAt").responseString { response in
-            print("Get DateTime: \(response.result.value ?? "No Record")")
-            switch response.result{
-            case .success(let value):
-                let json:JSON = JSON(value);
-                if(json != "No Record"){
-                    var resArr = response.result.value?.components(separatedBy: ",");
-                    self.entryDateLabel2.text = resArr![0]
-                    self.enterAtLabel2.text = resArr![1]
+        }
+        
+            Alamofire.request(server + "parkingrecord/getEnterAt").responseString { response in
+                print("Get DateTime: \(response.result.value ?? "No Record")")
+                switch response.result{
+                case .success(let value):
+                    let json:JSON = JSON(value);
+                    if(json != "No Record"){
+                        var resArr = response.result.value?.components(separatedBy: ",");
+                        self.entryDateLabel2.text = resArr![0]
+                        self.enterAtLabel2.text = resArr![1]
+                    }
+                case .failure(let error):
+                    break
                 }
-            case .failure(let error):
-                break
-            }
-    }
-        Alamofire.request(server + "parkingrecord/getParkingTime").responseString { response in
-            print("Get DateTime: \(response.result.value ?? "No Record")")
-            switch response.result{
-            case .success(let value):
-                let json:JSON = JSON(value);
-                if(json != "No Record"){
-//                    self.setUpTimer();
-                    self.parkingTime = Int(response.result.value!) ?? 0;
-                    self.durationLabel2.isHidden = false;
-                    self.durationLabel2.text = self.convertTime(miliseconds: self.parkingTime);
+        }
+            Alamofire.request(server + "parkingrecord/getParkingTime").responseString { response in
+                print("Get DateTime: \(response.result.value ?? "No Record")")
+                switch response.result{
+                case .success(let value):
+                    let json:JSON = JSON(value);
+                    if(json != "No Record"){
+    //                    self.setUpTimer();
+                        self.parkingTime = Int(response.result.value!) ?? 0;
+                        self.durationLabel2.isHidden = false;
+                        self.durationLabel2.text = self.convertTime(miliseconds: self.parkingTime);
+                    }
+                case .failure(let error):
+                    break
                 }
-            case .failure(let error):
-                break
             }
         }
     }
