@@ -275,5 +275,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ParkNow/Online redemption/PrepaymentViewController.swift"
+            timestampString = "577560395.862398"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "updatePayment()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ParkNow.PrepaymentViewController.(updatePayment in _60C5F64F37EA46F52D7D13DE19F64FE6)() -&gt; ()"
+                  moduleName = "ParkNow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christy/Desktop/Fyp/ParkNow/ParkNow/Online%20redemption/PrepaymentViewController.swift"
+                  timestampString = "577560396.177559"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "352">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in ParkNow.PrepaymentViewController.(updatePayment in _60C5F64F37EA46F52D7D13DE19F64FE6)() -&gt; ()"
+                  moduleName = "ParkNow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christy/Desktop/Fyp/ParkNow/ParkNow/Online%20redemption/PrepaymentViewController.swift"
+                  timestampString = "577560396.1802059"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
