@@ -12,89 +12,132 @@ import RealmSwift
 import Alamofire
 import SwiftyJSON
 
-class MallDetailViewController: UIViewController {
+class MallDetailViewController: UIViewController, UITableViewDelegate , UITableViewDataSource {
     var mallId:String = ""
     var mallName:String = ""
     var district:String = ""
     var address:String = ""
     var contact:String = ""
     var poster:String = ""
-
-//    var lots:Int = 0
+    var latitude:Double = 0.0
+    var longitude:Double = 0.0
+    
+    var carparkArr = [Carparks]()
     var realmResults:Results<Mall>?
     
-
+    @IBOutlet var mapView: MKMapView!
+    @IBOutlet var tableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        tableView.register(UINib(nibName: "CarparkTableViewCell", bundle: nil), forCellReuseIdentifier: "CarparkTableViewCell")
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-//        self.getLots()
-        self.setLabel()
-//        self.setPosterImageView()
+        self.setUpMap()
+        self.getCarpark()
     }
     
-    private func setLabel(){
-//        self.mallBtn.setTitle( self.mallName, for: .normal)
-//        self.districtLabel.text = "District: " + district
-//        self.addressLabel.text = "Address: " + address
-//        self.contactLabel.text = "Contact: " + contact
+    private func getCarpark(){
+        self.carparkArr.removeAll()
+        let parameters : Parameters = ["mallId": self.mallId]
+        
+        Alamofire.request(server + "carpark/getCarpark", method: .post , parameters : parameters ).validate().responseJSON { response in
+                print("Car Park info: \(response.result.value)") // response serialization result
+                switch response.result {
+                case .success(let value):
+                    let json:JSON = JSON(value);
+                    
+                    for index in 0..<json.count {
+                        self.carparkArr.append(
+                            Carparks(
+                                mallId: "\(json[index]["mallId"].stringValue)",
+                                mallName: "\(json[index]["mallName"].stringValue)",
+                                carparkId: "\(json[index]["carparkId"].stringValue)",
+                                carparkName: "\(json[index]["carparkName"].stringValue)",
+                                longitude: json[index]["longitude"].doubleValue ,
+                                latitude: json[index]["latitude"].doubleValue,
+                                lots: json[index]["lots"].intValue,
+                                chargeOnWeekday: json[index]["chargeOnWeekday"].intValue,
+                                chargeOnWeekends: json[index]["chargeOnWeekends"].intValue
+                        )
+                    )
+                        let pin = MKPointAnnotation()
+                        
+                        pin.coordinate = CLLocationCoordinate2D(latitude: json[index]["latitude"].doubleValue, longitude: json[index]["longitude"].doubleValue)
+                        pin.title = json[index]["carparkName"].stringValue
+                        pin.subtitle = "Available lots: " + String(json[index]["lots"].intValue)
+                        self.mapView.addAnnotation(pin)
+                    }
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+
+    func setUpMap(){
+        let initialLocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
+
+        let regionRadius: CLLocationDistance = 500
+
+        let mallRegion = MKCoordinateRegion(
+            center: initialLocation.coordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+
+        self.mapView.setRegion(mallRegion, animated: true)
+
     }
 
-//    private func setPosterImageView(){
-////        if unwrappedUrl =  {
-//            Alamofire.request(self.poster).responseData {
-//                response in
-//                if let data = response.result.value {
-//                    self.posterImageView.image = UIImage(data: data)
-//
-//                }
-//            }
-////        }
-//
-//    }
-//
-//    func setUpMap(){
-//        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
-//
-//        let regionRadius: CLLocationDistance = 500
-//
-//        let coordinateRegion = MKCoordinateRegion(
-//            center: initialLocation.coordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
-//
-//        mapView.setRegion(coordinateRegion, animated: true)
-//
-//        let pin = MKPointAnnotation()
-//
-//        pin.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-//        pin.title = mallName
-////        pin.subtitle = "Available lots: " + self.lots!
-//
-//        mapView.addAnnotation(pin)
-//
-//    }
 
-//    func getLots() {
-//        let parameters : Parameters = ["mallName":mallName]
-//
-//        Alamofire.request(server + "mall/getLots", method: .post, parameters: parameters).responseString { response in
-//            print("Get Lots: \(response.result.value ?? "No data")")
-//            switch response.result{
-//            case .success(let value):
-//                self.lots = value
-//            case .failure(let error):
-//                self.lots = "Fail to return available lots. Try again."
-//            break
-//            }
-//            self.setUpMap()
-//            self.setLabel()
-//        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return carparkArr.count
+    }
 
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "carparkCell", for: indexPath)
+//        cell.textLabel?.text = carparkArr[indexPath.row].carparkName
+//        return cell
 //    }
     
-    //redirect to google map
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CarparkTableViewCell", for: indexPath) as! CarparkTableViewCell
+        cell.carparkLabel.text = self.carparkArr[indexPath.row].carparkName
+        cell.mallLabel.text = self.carparkArr[indexPath.row].mallName
+        cell.lotsLabel.text = "\(String(self.carparkArr[indexPath.row].lots))"
+        cell.navBtn.tag = indexPath.row
+        cell.navBtn.addTarget(self, action: #selector(self.navBtnClicked(_:)), for: .touchUpInside);
+        return cell
+    }
+    
+    @IBAction func navBtnClicked(_ sender: Any) {
+        let index = (sender as AnyObject).tag
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            let urlStr = "comgooglemaps://?q=\(self.carparkArr[index!].carparkName)&center=\(self.carparkArr[index!].latitude),\(self.carparkArr[index!].longitude)&zoom=14&views=traffic"
+            if let url = URL(string: urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!){
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        } else {
+            print("Can't use comgooglemaps://");
+        }
+    }
+    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        print(indexPath.row)
+        var msg = "Charge: \nMon-Fri: $" + String(carparkArr[indexPath.row].chargeOnWeekday) +
+            " \nSat&Sun: $" + String(carparkArr[indexPath.row].chargeOnWeekends)
+        let alertController = UIAlertController(title: "iPark", message: msg, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+
+    }
+
+
+//    redirect to google map
 //    @IBAction func NavBtnClicked(_ sender: Any) {
 //
 //        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
@@ -107,7 +150,7 @@ class MallDetailViewController: UIViewController {
 //            print("Can't use comgooglemaps://");
 //        }
 //    }
-    
+
     /*
      // MARK: - Navigation
      

@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         GMSServices.provideAPIKey("AIzaSyCJkcvC-03pjJQRTFyOteN3_Xp2Nk6AXwc")
+//        GMSPlacesClient.provideAPIKey("AIzaSyCJkcvC-03pjJQRTFyOteN3_Xp2Nk6AXwc")
         return true
     }
     

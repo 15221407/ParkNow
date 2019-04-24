@@ -17,8 +17,10 @@ class PosterViewController: UIViewController {
     var mallName:String = ""
     var district:String = ""
     var address:String = ""
-    var contact:String = ""
+    var contact:Int = 0
     var poster:String = ""
+    var latitude:Double = 0.0
+    var longitude:Double = 0.0
     
     //    var lots:Int = 0
     var realmResults:Results<Mall>?
@@ -28,8 +30,7 @@ class PosterViewController: UIViewController {
     @IBOutlet var mallBtn: UIButton!
     @IBOutlet var districtLabel: UILabel!
     @IBOutlet var addressLabel: UILabel!
-    @IBOutlet var contactLabel: UILabel!
-    
+    @IBOutlet var contactBtn: UIButton!
     
     
     override func viewDidLoad() {
@@ -43,17 +44,26 @@ class PosterViewController: UIViewController {
     
     private func setLabel(){
         self.mallBtn.setTitle( self.mallName, for: .normal)
-        self.districtLabel.text = "District: " + district
-        self.addressLabel.text = "Address: " + address
-        self.contactLabel.text = "Contact: " + contact
+        self.districtLabel.text = district
+        self.addressLabel.text = address
+        self.contactBtn.setTitle(String(contact), for: .normal)
+    }
+    
+    @IBAction func contactBtnClicked(_ sender: Any) {
+        guard let number = URL(string: "tel://" + String(self.contact)) else { return }
+        UIApplication.shared.open(number)
     }
     
     private func setPosterImageView(){
-        Alamofire.request(self.poster).responseData {
-            response in
-            if let data = response.result.value {
-                self.posterImageView.image = UIImage(data: data)
-                
+        if(self.poster == ""){
+            self.posterImageView.image = UIImage(named: "noPoster")
+        }else{
+            Alamofire.request(self.poster).responseData {
+                response in
+                if let data = response.result.value {
+                    self.posterImageView.image = UIImage(data: data)
+                    
+                }
             }
         }
     }
@@ -62,6 +72,8 @@ class PosterViewController: UIViewController {
         if segue.identifier == "showMall" {
             if let viewController = segue.destination as? MallDetailViewController {
                 viewController.mallId =  self.mallId
+                viewController.latitude =  self.latitude
+                viewController.longitude =  self.longitude
             }
         }
     }
@@ -77,3 +89,4 @@ class PosterViewController: UIViewController {
     */
 
 }
+

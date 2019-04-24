@@ -37,7 +37,7 @@ class MyCarViewController: UIViewController {
     }
     
     @IBAction func whereBtnClicked(_ sender: Any) {
-            let parameters : Parameters = ["licensePlate": self.licensePlate]
+        let parameters : Parameters = ["licensePlate": self.licensePlate]
          Alamofire.request(server + "RFIDTag/getLocation", method: .post, parameters: parameters).responseString { response in
             print("Get Location: \(response.result.value ?? "No Record")")
             switch response.result{
@@ -92,6 +92,7 @@ class MyCarViewController: UIViewController {
                     var resArr = value.components(separatedBy: ",");
                     if(resArr[0] == "enter" && resArr[1] == "N" ){
                         self.prepayBtn.isHidden = false;
+                        self.prepayBtn.isEnabled = true;
                         self.whereBtn.isHidden = false;
                     }else if (resArr[0] == "enter" && resArr[1] == "Y" ){
                         self.prepayBtn.isHidden = false;

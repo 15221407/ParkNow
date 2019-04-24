@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ParkNow/Online redemption/PrepaymentViewController.swift"
-            timestampString = "577560395.862398"
+            timestampString = "577770882.4841861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "updatePayment()"
             landmarkType = "7">
             <Locations>
@@ -298,11 +298,11 @@
                   moduleName = "ParkNow"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/christy/Desktop/Fyp/ParkNow/ParkNow/Online%20redemption/PrepaymentViewController.swift"
-                  timestampString = "577560396.177559"
+                  timestampString = "577765945.127346"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161"
                   offsetFromSymbolStart = "352">
                </Location>
                <Location
@@ -313,14 +313,30 @@
                   moduleName = "ParkNow"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/christy/Desktop/Fyp/ParkNow/ParkNow/Online%20redemption/PrepaymentViewController.swift"
-                  timestampString = "577560396.1802059"
+                  timestampString = "577765945.12974"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "157"
-                  endingLineNumber = "157"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
                   offsetFromSymbolStart = "36">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ParkNow/Homepage/MallDetailViewController.swift"
+            timestampString = "577770882.4843"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

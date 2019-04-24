@@ -29,15 +29,15 @@ class RegisterMyCarTableViewController: UITableViewController {
     var realmResults:Results<Car>?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         self.hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.getCar()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
         self.warningLabel.isHidden = true
+        self.getCar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,7 +101,8 @@ class RegisterMyCarTableViewController: UITableViewController {
     }
     
     func registerMyCar() {
-        let parameters : Parameters = ["licensePlate": licenseTF.text!]
+        let licenseString = licenseTF.text!.removingWhitespaces()
+        let parameters : Parameters = ["licensePlate": licenseString]
         Alamofire.request(server + "car/registerYourCar", method: .post, parameters: parameters)
             .responseString { response in
                 print("Register your car: \(response.result.value ?? "No data")")
@@ -249,4 +250,9 @@ class RegisterMyCarTableViewController: UITableViewController {
     }
     */
 
+}
+extension String {
+    func removingWhitespaces() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
 }

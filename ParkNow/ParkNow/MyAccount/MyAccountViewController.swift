@@ -18,6 +18,8 @@ class MyAccountViewController: UIViewController {
     @IBOutlet var currentPointLabel: UILabel!
     @IBOutlet var signInBtn: UIButton!
     @IBOutlet var helloLabel: UILabel!
+    
+    @IBOutlet var recordBtn: UIButton!
     @IBOutlet var logOutbtn: UIButton!
     @IBOutlet var myPointView: UIView!
     var currentPoint:String = ""
@@ -63,10 +65,12 @@ class MyAccountViewController: UIViewController {
         if UserDefaults.standard.string(forKey: "username") != nil {
             self.logOutbtn.setTitle("Sign Out", for: .normal)
             self.logOutbtn.isHidden = false
+            self.recordBtn.isHidden = false
             self.signInBtn.isHidden = true
         } else if UserDefaults.standard.string(forKey: "username") == nil {
             self.signInBtn.setTitle("Sign In", for: .normal)
             self.signInBtn.isHidden = false
+            self.recordBtn.isHidden = true
             self.logOutbtn.isHidden = true
         }
     }

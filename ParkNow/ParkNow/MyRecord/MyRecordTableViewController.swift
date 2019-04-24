@@ -28,17 +28,18 @@ class MyRecordTableViewController: UITableViewController {
 //        self.segmentedControl.selectedSegmentIndex = 0
         self.registerNib();
         self.setSegmentedControlStyle()
-        if(UserDefaults.standard.string(forKey: "username") != nil){
-            self.getShoppingRecord();
-            self.getPointRecord();
-            self.getParkingRecord();
-        }
+
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        if(UserDefaults.standard.string(forKey: "username") != nil){
+//            self.getShoppingRecord();
+            self.getPointRecord();
+//            self.getParkingRecord();
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -232,7 +233,6 @@ class MyRecordTableViewController: UITableViewController {
             return myCell
         
         case 2:
-      
             let myCell = tableView.dequeueReusableCell(withIdentifier: "ParkingTableViewCell", for: indexPath) as! ParkingTableViewCell
             myCell.dateLabel.text = getDate(dateString: self.parkingRealmResults![indexPath.row].enterAt!)
             myCell.licenseLabel.text = self.parkingRealmResults?[indexPath.row].licensePlate
@@ -274,7 +274,7 @@ class MyRecordTableViewController: UITableViewController {
             self.underlineBar.frame.origin.x = (self.segmentedControl.frame.width / CGFloat(self.segmentedControl.numberOfSegments)) * CGFloat(self.segmentedControl.selectedSegmentIndex)
         }
         
-        self.tableView.reloadData();
+//        self.tableView.reloadData();
         switch(self.segmentedControl.selectedSegmentIndex){
         case 0:
             self.getPointRecord();

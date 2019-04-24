@@ -30,6 +30,9 @@ class PrepaymentViewController: UIViewController {
     @IBOutlet var PointLabel: UILabel!
     @IBOutlet var newPointLabel: UILabel!
     
+    @IBOutlet var confirmBtn: UIButton!
+    @IBOutlet var cancelbtn: UIButton!
+    
     var mallName:String? = nil
     var currentPoint:Int = 0
     var totalHour:Int = 0
@@ -99,6 +102,8 @@ class PrepaymentViewController: UIViewController {
     }
     
     private func setUpButton(){
+        self.confirmBtn.isEnabled = true;
+        self.cancelbtn.isEnabled = true;
         
         self.free1Btn.isEnabled = false
         self.free2Btn.isEnabled = false
@@ -116,7 +121,7 @@ class PrepaymentViewController: UIViewController {
     }
     
     private func getCharge(completionHandler: @escaping () -> Void) {
-        Alamofire.request(server + "parkingrecord/calculate").responseString { response in
+        Alamofire.request(server + "paymentrecord/calculate").responseString { response in
             print("Get Calculated Fee: \(response.result.value ?? "No Record")")
             let json = JSON(response.result.value)//
             var resArr = response.result.value?.components(separatedBy: ",");
@@ -153,7 +158,7 @@ class PrepaymentViewController: UIViewController {
         
         let parameters : Parameters = ["redemptionPoint": self.redemptionPoint , "finalCharge" : self.finalCharge]
         
-        Alamofire.request(server + "parkingRecord/updateAfterPayment", method: .post, parameters: parameters).responseString { response in
+        Alamofire.request(server + "paymentRecord/updateAfterPayment", method: .post, parameters: parameters).responseString { response in
             print("Update Payment: \(response.result.value ?? "No data")")
             switch response.result{
             case .success(let value):
@@ -173,7 +178,7 @@ class PrepaymentViewController: UIViewController {
     
     func fetchClientToken() {
         // TODO: Switch this URL to your own authenticated API
-        let clientTokenURL = NSURL(string: server + "parkingRecord/prepay" )!
+        let clientTokenURL = NSURL(string: server + "paymentRecord/prepay" )!
         let clientTokenRequest = NSMutableURLRequest(url: clientTokenURL as URL)
         clientTokenRequest.setValue("text/plain", forHTTPHeaderField: "Accept")
         
@@ -212,7 +217,7 @@ class PrepaymentViewController: UIViewController {
     }
    
     func postNonceToServer(paymentMethodNonce: String) {
-        let paymentURL = URL(string: server + "parkingRecord/calculateBeforePay")!
+        let paymentURL = URL(string: server + "paymentRecord/calculateBeforePay")!
         var request = URLRequest(url: paymentURL)
         request.httpBody = "payment_method_nonce=\(paymentMethodNonce)&redemptionHour=\(self.redemptionHour)&redemptionPoint=\(self.redemptionPoint)".data(using: String.Encoding.utf8)
         request.httpMethod = "POST"
@@ -280,7 +285,10 @@ class PrepaymentViewController: UIViewController {
     }
     
     @IBAction func confrimPayment(_ sender: Any){
-        Alamofire.request(server + "parkingrecord/calculate").responseString { response in
+        self.confirmBtn.isEnabled = false;
+        self.cancelbtn.isEnabled = false;
+        
+        Alamofire.request(server + "paymentRecord/calculate").responseString { response in
             print("Final Check: \(response.result.value ?? "No Record")")
             switch response.result{
             case .success(let value):

@@ -24,7 +24,7 @@ class MallViewController: UIViewController,UICollectionViewDataSource,UICollecti
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-//        self.setUpCollectionView()
+        self.setUpCollectionView()
 
     }
     
@@ -59,13 +59,11 @@ class MallViewController: UIViewController,UICollectionViewDataSource,UICollecti
                 }
                 for index in 0..<json.count {
                     let mall = Mall()
-                    mall.mallId = json[index]["id"].stringValue
+                    mall.mallId = json[index]["mallId"].stringValue
                     mall.name = json[index]["mallName"].stringValue
                     mall.district = json[index]["district"].stringValue
                     mall.address = json[index]["address"].stringValue
                     mall.contact = json[index]["contact"].intValue
-                    //                    mall.parkingFee = json[index]["parkingFee"].stringValue
-                    //                    mall.spending = json[index]["spending"].intValue
                     mall.longitude = json[index]["longitude"].doubleValue
                     mall.latitude = json[index]["latitude"].doubleValue
                     mall.poster = json[index]["poster"].stringValue
@@ -91,6 +89,10 @@ class MallViewController: UIViewController,UICollectionViewDataSource,UICollecti
                 viewController.mallName =  realmResults![selectedIndex!.row].name as! String
                 viewController.address =  realmResults?[selectedIndex!.row].address as! String
                 viewController.poster =  realmResults?[selectedIndex!.row].poster as! String
+                viewController.district =  realmResults?[selectedIndex!.row].district as! String
+                viewController.longitude =  (realmResults?[selectedIndex!.row].longitude)!
+                viewController.latitude =  (realmResults?[selectedIndex!.row].latitude)!
+                viewController.contact =  (realmResults?[selectedIndex!.row].contact)!
             }
         }
     }
