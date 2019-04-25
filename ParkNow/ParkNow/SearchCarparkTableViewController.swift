@@ -12,7 +12,9 @@ import Alamofire
 import SwiftyJSON
 import Foundation
 
-
+struct Offer{
+    
+}
 
 class SearchCarparkTableViewController: UITableViewController , UISearchBarDelegate{
     
@@ -37,6 +39,37 @@ class SearchCarparkTableViewController: UITableViewController , UISearchBarDeleg
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getOffer(carparkId:String){
+        let parameters : Parameters = ["carparkId": carparkId ]
+        Alamofire.request(server + "offer/json", method: .get).validate().responseJSON { response in
+            print("Car Offer: \(response.result.value)") // response serialization result
+            switch response.result {
+            case .success(let value):
+                let json:JSON = JSON(value);
+                for index in 0..<json.count {
+                    self.parkArr.append(
+                        Carparks(
+                            mallId: "\(json[index]["mallId"].stringValue)",
+                            mallName: "\(json[index]["mallName"].stringValue)",
+                            carparkId: "\(json[index]["carparkId"].stringValue)",
+                            carparkName: "\(json[index]["carparkName"].stringValue)",
+                            longitude: json[index]["longitude"].doubleValue ,
+                            latitude: json[index]["latitude"].doubleValue,
+                            lots: json[index]["lots"].intValue,
+                            chargeOnWeekday: json[index]["chargeOnWeekday"].intValue,
+                            chargeOnWeekends: json[index]["chargeOnWeekends"].intValue
+                        )
+                    )
+                    self.tableView.reloadData()
+                    self.saveParkArr()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
     
     //Search bar
@@ -77,14 +110,6 @@ class SearchCarparkTableViewController: UITableViewController , UISearchBarDeleg
         return self.parkArr.count
     }
     
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "carparkCell", for: indexPath)
-//
-//        cell.textLabel?.text = self.parkArr[indexPath.row].carparkName
-//        // Configure the cell...
-//
-//        return cell
-//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CarparkTableViewCell", for: indexPath) as! CarparkTableViewCell
@@ -111,9 +136,10 @@ class SearchCarparkTableViewController: UITableViewController , UISearchBarDeleg
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         print(indexPath.row)
-        var msg = "Charge: \nMon-Fri: $" + String(parkArr[indexPath.row].chargeOnWeekday) +
-            " \nSat&Sun: $" + String(parkArr[indexPath.row].chargeOnWeekends)
-        let alertController = UIAlertController(title: "iPark", message: msg, preferredStyle: .alert)
+        self.getOffer(carparkId: String(self.parkArr[indexPath.row].carparkId))
+        var msg = "Mon - Fri: $" + String(parkArr[indexPath.row].chargeOnWeekday) +
+            " \nSat & Sun: $" + String(parkArr[indexPath.row].chargeOnWeekends)
+        let alertController = UIAlertController(title: "Charge", message: msg, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
         
@@ -149,6 +175,7 @@ class SearchCarparkTableViewController: UITableViewController , UISearchBarDeleg
         }
     }
     
+
     func saveParkArr(){
         self.initParkArr = self.parkArr
     }

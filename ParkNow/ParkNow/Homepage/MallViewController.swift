@@ -24,7 +24,7 @@ class MallViewController: UIViewController,UICollectionViewDataSource,UICollecti
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.setUpCollectionView()
+//        self.setUpCollectionView()
 
     }
     
@@ -35,8 +35,8 @@ class MallViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     func setUpCollectionView(){
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
-//        layout.itemSize = CGSize(width: screenWidth/3, height: screenWidth/3)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+        layout.itemSize = CGSize(width: 375, height: 750)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         collectionView!.collectionViewLayout = layout

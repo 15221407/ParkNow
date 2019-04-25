@@ -23,96 +23,99 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="075-Z6-XRr">
-                                <rect key="frame" x="25" y="38.5" width="287" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="287" id="0QE-w3-XGs"/>
-                                    <constraint firstAttribute="height" constant="21" id="Tdn-K7-9kb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="15"/>
+                                <rect key="frame" x="209" y="31" width="99" height="21"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gd8-ls-1JM">
-                                <rect key="frame" x="25" y="67.5" width="25" height="24"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download" translatesAutoresizingMaskIntoConstraints="NO" id="Gd8-ls-1JM">
+                                <rect key="frame" x="99" y="57" width="25" height="23.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="Ajm-Fk-XDm"/>
-                                    <constraint firstAttribute="height" constant="24" id="Cgm-Dz-fIF"/>
+                                    <constraint firstAttribute="width" constant="25" id="ULM-SL-Mvg"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k2M-Qd-e2h">
-                                <rect key="frame" x="166" y="67.5" width="27" height="24"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exit" translatesAutoresizingMaskIntoConstraints="NO" id="k2M-Qd-e2h">
+                                <rect key="frame" x="209" y="60" width="27" height="20.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="eoJ-xB-NUT"/>
-                                    <constraint firstAttribute="width" constant="27" id="wlS-bY-Cej"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="27" id="9ly-Vg-J9f"/>
+                                    <constraint firstAttribute="height" constant="20.5" id="Obv-ez-qtX"/>
+                                    <constraint firstAttribute="width" constant="27" id="PaR-p2-sua"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMt-vV-Ncz">
+                                <rect key="frame" x="239" y="59" width="81" height="21"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="8"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btk-DI-VGr">
+                                <rect key="frame" x="99" y="13" width="148" height="21"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN-Bold" family="Oriya Sangam MN" pointSize="12"/>
+                                <color key="textColor" red="0.87098878622055054" green="0.58695119619369507" blue="0.060199663043022156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parking" translatesAutoresizingMaskIntoConstraints="NO" id="5g2-XM-6Tn">
+                                <rect key="frame" x="8" y="13" width="75" height="73.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="PsQ-rs-2Td"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEe-ns-k1q">
+                                <rect key="frame" x="99" y="31" width="102" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Ocf-ZM-heV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMd-bj-CeW">
-                                <rect key="frame" x="60" y="69" width="139" height="21"/>
+                                <rect key="frame" x="128" y="59" width="78" height="19.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="NoV-sZ-XFg"/>
-                                    <constraint firstAttribute="width" constant="139" id="o1j-ml-vch"/>
+                                    <constraint firstAttribute="width" constant="78" id="nSE-aO-PrK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMt-vV-Ncz">
-                                <rect key="frame" x="201" y="69" width="111" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="111" id="V3P-9J-5kQ"/>
-                                    <constraint firstAttribute="height" constant="21" id="W7b-uQ-KQi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="8"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="k2M-Qd-e2h" firstAttribute="centerY" secondItem="SMd-bj-CeW" secondAttribute="centerY" id="8aR-Dh-3E9"/>
-                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="bottom" secondItem="e1P-ih-ZMN" secondAttribute="bottomMargin" id="9qa-Vk-ASh"/>
-                            <constraint firstItem="075-Z6-XRr" firstAttribute="trailing" secondItem="BMt-vV-Ncz" secondAttribute="trailing" id="Gl8-Qx-KA6"/>
-                            <constraint firstItem="SMd-bj-CeW" firstAttribute="centerY" secondItem="Gd8-ls-1JM" secondAttribute="centerY" id="JPf-QD-4GA"/>
-                            <constraint firstItem="BMt-vV-Ncz" firstAttribute="leading" secondItem="k2M-Qd-e2h" secondAttribute="trailing" constant="8" symbolic="YES" id="KQz-Js-Mz7"/>
-                            <constraint firstItem="BMt-vV-Ncz" firstAttribute="centerY" secondItem="SMd-bj-CeW" secondAttribute="centerY" id="Mdd-4v-V1q"/>
-                            <constraint firstAttribute="height" constant="99.5" id="N69-UW-e7d"/>
-                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="leading" secondItem="075-Z6-XRr" secondAttribute="leading" id="aqu-IM-5on"/>
-                            <constraint firstAttribute="width" constant="320" id="dw2-H8-xlE"/>
-                            <constraint firstItem="SMd-bj-CeW" firstAttribute="leading" secondItem="Gd8-ls-1JM" secondAttribute="trailing" constant="10" id="iSb-IQ-iJP"/>
-                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="top" secondItem="075-Z6-XRr" secondAttribute="bottom" constant="8" symbolic="YES" id="xUj-nQ-7O9"/>
+                            <constraint firstItem="BMt-vV-Ncz" firstAttribute="leading" secondItem="k2M-Qd-e2h" secondAttribute="trailing" constant="3" id="1wT-ft-sHz"/>
+                            <constraint firstItem="075-Z6-XRr" firstAttribute="leading" secondItem="k2M-Qd-e2h" secondAttribute="leading" id="2YO-e7-mPR"/>
+                            <constraint firstItem="5g2-XM-6Tn" firstAttribute="centerY" secondItem="e1P-ih-ZMN" secondAttribute="centerY" id="70q-cj-R1l"/>
+                            <constraint firstItem="SMd-bj-CeW" firstAttribute="centerY" secondItem="BMt-vV-Ncz" secondAttribute="centerY" id="7SS-qo-Gmk"/>
+                            <constraint firstAttribute="trailing" secondItem="075-Z6-XRr" secondAttribute="trailing" constant="12" id="8pW-L7-mOM"/>
+                            <constraint firstItem="rEe-ns-k1q" firstAttribute="firstBaseline" secondItem="075-Z6-XRr" secondAttribute="firstBaseline" id="B6v-JO-i9W"/>
+                            <constraint firstItem="Btk-DI-VGr" firstAttribute="leading" secondItem="5g2-XM-6Tn" secondAttribute="trailing" constant="16" id="Eh7-V1-eIa"/>
+                            <constraint firstItem="rEe-ns-k1q" firstAttribute="leading" secondItem="Gd8-ls-1JM" secondAttribute="leading" id="H8k-sm-nyQ"/>
+                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="bottom" secondItem="k2M-Qd-e2h" secondAttribute="bottom" id="JdX-tz-d8i"/>
+                            <constraint firstItem="SMd-bj-CeW" firstAttribute="top" secondItem="rEe-ns-k1q" secondAttribute="bottom" constant="7" id="KlZ-hC-4NO"/>
+                            <constraint firstItem="5g2-XM-6Tn" firstAttribute="top" secondItem="e1P-ih-ZMN" secondAttribute="top" constant="13" id="NuR-SR-GFd"/>
+                            <constraint firstItem="5g2-XM-6Tn" firstAttribute="leading" secondItem="e1P-ih-ZMN" secondAttribute="leadingMargin" id="PTt-MD-gKx"/>
+                            <constraint firstItem="SMd-bj-CeW" firstAttribute="firstBaseline" secondItem="BMt-vV-Ncz" secondAttribute="firstBaseline" id="Szk-dK-vnI"/>
+                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="top" secondItem="rEe-ns-k1q" secondAttribute="bottom" constant="5" id="Wme-kG-IvK"/>
+                            <constraint firstItem="k2M-Qd-e2h" firstAttribute="top" secondItem="075-Z6-XRr" secondAttribute="bottom" constant="8" symbolic="YES" id="a8E-eT-qVm"/>
+                            <constraint firstItem="5g2-XM-6Tn" firstAttribute="top" secondItem="Btk-DI-VGr" secondAttribute="top" id="bPM-kl-9o0"/>
+                            <constraint firstAttribute="bottom" secondItem="Gd8-ls-1JM" secondAttribute="bottom" constant="19" id="bWL-ag-MsQ"/>
+                            <constraint firstAttribute="trailing" secondItem="Btk-DI-VGr" secondAttribute="trailing" constant="73" id="cgZ-pw-iZK"/>
+                            <constraint firstItem="SMd-bj-CeW" firstAttribute="leading" secondItem="Gd8-ls-1JM" secondAttribute="trailing" constant="4" id="cmi-Np-OKl"/>
+                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="top" secondItem="Btk-DI-VGr" secondAttribute="bottom" constant="23" id="eLd-L0-2vk"/>
+                            <constraint firstItem="Gd8-ls-1JM" firstAttribute="centerY" secondItem="SMd-bj-CeW" secondAttribute="centerY" id="gAf-M0-SKE"/>
+                            <constraint firstItem="075-Z6-XRr" firstAttribute="leading" secondItem="rEe-ns-k1q" secondAttribute="trailing" constant="8" symbolic="YES" id="gDq-gP-fdm"/>
+                            <constraint firstItem="k2M-Qd-e2h" firstAttribute="leading" secondItem="SMd-bj-CeW" secondAttribute="trailing" constant="3" id="qk0-rG-Oc8"/>
+                            <constraint firstItem="rEe-ns-k1q" firstAttribute="top" secondItem="e1P-ih-ZMN" secondAttribute="top" constant="31" id="sOS-cQ-AEj"/>
+                            <constraint firstItem="Btk-DI-VGr" firstAttribute="leading" secondItem="rEe-ns-k1q" secondAttribute="leading" id="weT-Hj-A0I"/>
+                            <constraint firstItem="rEe-ns-k1q" firstAttribute="baseline" secondItem="075-Z6-XRr" secondAttribute="baseline" id="ynj-K2-iYG"/>
+                            <constraint firstAttribute="trailing" secondItem="BMt-vV-Ncz" secondAttribute="trailing" id="z74-iG-aa0"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btk-DI-VGr">
-                        <rect key="frame" x="25" y="18" width="148" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="148" id="abx-qO-WUm"/>
-                            <constraint firstAttribute="height" constant="21" id="dd7-SE-V6f"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="OriyaSangamMN-Bold" family="Oriya Sangam MN" pointSize="15"/>
-                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEe-ns-k1q">
-                        <rect key="frame" x="167" y="18" width="148" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="148" id="9Xv-DV-1oa"/>
-                            <constraint firstAttribute="height" constant="21" id="pzl-fr-hHt"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="15"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Btk-DI-VGr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="3rI-YH-tf4"/>
-                    <constraint firstItem="e1P-ih-ZMN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7ra-CJ-CBi"/>
-                    <constraint firstItem="rEe-ns-k1q" firstAttribute="baseline" secondItem="Btk-DI-VGr" secondAttribute="baseline" id="C1x-OH-o5D"/>
-                    <constraint firstItem="e1P-ih-ZMN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GwG-qn-kO7"/>
-                    <constraint firstItem="Btk-DI-VGr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="HrL-3b-2Oa"/>
-                    <constraint firstAttribute="bottom" secondItem="e1P-ih-ZMN" secondAttribute="bottom" id="IMj-gh-nlD"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="rEe-ns-k1q" secondAttribute="trailing" constant="-11" id="Wiq-YR-hAz"/>
-                    <constraint firstAttribute="trailing" secondItem="e1P-ih-ZMN" secondAttribute="trailing" id="aD7-H1-QcV"/>
-                    <constraint firstItem="Btk-DI-VGr" firstAttribute="leading" secondItem="075-Z6-XRr" secondAttribute="leading" id="dNI-lu-abq"/>
+                    <constraint firstItem="e1P-ih-ZMN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ic4-ZG-wHR"/>
+                    <constraint firstAttribute="trailing" secondItem="e1P-ih-ZMN" secondAttribute="trailing" id="KqX-Ke-0RZ"/>
+                    <constraint firstItem="e1P-ih-ZMN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="P4k-Hn-fzt"/>
+                    <constraint firstItem="e1P-ih-ZMN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wON-ex-Hup"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -126,4 +129,9 @@
             <point key="canvasLocation" x="1036.8" y="450.67466266866569"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="download" width="30" height="30"/>
+        <image name="exit" width="30" height="30"/>
+        <image name="parking" width="200" height="200"/>
+    </resources>
 </document>

@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ParkNow/Online redemption/PrepaymentViewController.swift"
-            timestampString = "577770882.4841861"
+            timestampString = "577853718.9205"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "updatePayment()"
             landmarkType = "7">
             <Locations>
@@ -298,11 +298,11 @@
                   moduleName = "ParkNow"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/christy/Desktop/Fyp/ParkNow/ParkNow/Online%20redemption/PrepaymentViewController.swift"
-                  timestampString = "577765945.127346"
+                  timestampString = "577853719.276368"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "161"
-                  endingLineNumber = "161"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
                   offsetFromSymbolStart = "352">
                </Location>
                <Location
@@ -313,11 +313,11 @@
                   moduleName = "ParkNow"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/christy/Desktop/Fyp/ParkNow/ParkNow/Online%20redemption/PrepaymentViewController.swift"
-                  timestampString = "577765945.12974"
+                  timestampString = "577853719.279102"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
+                  startingLineNumber = "171"
+                  endingLineNumber = "171"
                   offsetFromSymbolStart = "36">
                </Location>
             </Locations>
@@ -330,7 +330,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ParkNow/Homepage/MallDetailViewController.swift"
-            timestampString = "577770882.4843"
+            timestampString = "577805440.357336"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"

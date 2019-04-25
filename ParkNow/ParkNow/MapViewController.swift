@@ -106,6 +106,7 @@ class MapViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate
             else {
@@ -136,7 +137,7 @@ class MapViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                     let pin = MKPointAnnotation()
                     pin.coordinate = CLLocationCoordinate2D(latitude: carpark.latitude , longitude: carpark.longitude)
                     pin.title = carpark.carparkName
-                    pin.subtitle = "Available lots: "
+                    pin.subtitle = "Available lots: \(String(carpark.lots))"
                     self.mapView.addAnnotation(pin)
     
                     self.nearestArr.append(
@@ -194,8 +195,8 @@ class MapViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         print(indexPath.row)
-        var msg = "Charge: \nMon-Fri: $" + String(nearestArr[indexPath.row].chargeOnWeekday) +
-            " \nSat&Sun: $" + String(nearestArr[indexPath.row].chargeOnWeekends)
+        var msg = "Charge: \nMon - Fri: $" + String(nearestArr[indexPath.row].chargeOnWeekday) +
+            " \nSat & Sun: $" + String(nearestArr[indexPath.row].chargeOnWeekends)
         let alertController = UIAlertController(title: "iPark", message: msg, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         self.present(alertController, animated: true, completion: nil)

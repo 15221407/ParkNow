@@ -12,11 +12,37 @@ import SwiftyJSON
 import Foundation
 import RealmSwift
 
+struct Parking{
+    var mallName:String
+    var carparkName: String
+    var enterAt:String
+    var leaveAt: String
+    var licensePlate: String
+}
 
+struct Point{
+    var mallName:String
+    var recordType: String
+    var amount:String
+    var actionAt: String
+
+}
+
+struct Shopping{
+    var mallName:String
+    var shopName: String
+    var consumption:String
+    var point: String
+    var addAt: String
+}
 
 
 class MyRecordTableViewController: UITableViewController {
 
+      var parkingArr = [Parking]()
+    var shoppingArr = [Shopping]()
+    var pointArr = [Point]()
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     var shoppingRealmResults:Results<ShoppingRecord>?
     var pointRealmResults:Results<PointRecord>?
@@ -35,11 +61,9 @@ class MyRecordTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if(UserDefaults.standard.string(forKey: "username") != nil){
-//            self.getShoppingRecord();
             self.getPointRecord();
-//            self.getParkingRecord();
-            
         }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,15 +88,6 @@ class MyRecordTableViewController: UITableViewController {
             NSAttributedString.Key.foregroundColor: UIColor.orange
             ], for: .selected)
         
-//        
-//        underlineBar.translatesAutoresizingMaskIntoConstraints = false // false since we are using auto layout constraints
-//        underlineBar.backgroundColor = UIColor.orange
-//        view.addSubview(underlineBar)
-//        
-//        underlineBar.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
-//        underlineBar.heightAnchor.constraint(equalToConstant: 5).isActive = true
-//        underlineBar.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor, multiplier: 1 / CGFloat(segmentedControl.numberOfSegments)).isActive = true
-//        
 
     }
 
@@ -83,30 +98,26 @@ class MyRecordTableViewController: UITableViewController {
     }
     
     private func getShoppingRecord(){
-        let realm = try! Realm()
+
         Alamofire.request(server + "shoppingRecord/json", method: .get).validate().responseJSON { response in
             print("Shopping Record: \(response.result.value)") // response serialization resul
             switch response.result {
                 
             case .success(let value):
                 let json:JSON = JSON(value);
-                // Delete all objects from the realm
-                try! realm.write {
-                    realm.deleteAll()
-                }
+                self.shoppingArr.removeAll()
                 for index in 0..<json.count {
-                    let shopping = ShoppingRecord()
-                    shopping.mallName = json[index]["mallName"].stringValue
-                    shopping.shopName = json[index]["shopName"].stringValue
-                    print(shopping.shopName)
-                    shopping.consumption = json[index]["consumption"].stringValue
-                    shopping.point = json[index]["gainedPoint"].stringValue
-                    shopping.addAt = json[index]["addAt"].stringValue
-                    try! realm.write {
-                        realm.add(shopping)
-                    }
+                    self.shoppingArr.append(
+                        Shopping(
+                            mallName: "\(json[index]["mallName"].stringValue)",
+                            shopName : "\(json[index]["shopName"].stringValue)",
+                            consumption : "\(json[index]["consumption"].stringValue)",
+                            point: "\(json[index]["gainedPoint"].stringValue)",
+                            addAt :"\(json[index]["addAt"].stringValue)"
+                        )
+                    )
                 }
-                self.shoppingRealmResults = realm.objects(ShoppingRecord.self)
+                self.shoppingArr = self.shoppingArr.reversed()
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -115,28 +126,27 @@ class MyRecordTableViewController: UITableViewController {
     }
     
     private func getPointRecord(){
-        
-        let realm = try! Realm()
+
+
         Alamofire.request(server + "pointRecord/json", method: .get).validate().responseJSON { response in
             print("Point Record: \(response.result.value)") // response serialization resul
             switch response.result {
             case .success(let value):
                 let json:JSON = JSON(value);
-                // Delete all objects from the realm
-                try! realm.write {
-                    realm.deleteAll()
-                }
+                self.pointArr.removeAll()
                 for index in 0..<json.count {
-                    let point = PointRecord()
-                    point.mallName = json[index]["mallName"].stringValue
-                    point.type = json[index]["type"].stringValue
-                    point.amount = json[index]["amount"].intValue
-                    point.actionAt = json[index]["actionAt"].stringValue
-                    try! realm.write {
-                        realm.add(point)
-                    }
+                    self.pointArr.append(
+                        Point(
+                            mallName: "\(json[index]["mallName"].stringValue)",
+                            recordType : "\(json[index]["type"].stringValue)",
+                            amount : "\(json[index]["amount"].stringValue)",
+                            actionAt : "\(json[index]["actionAt"].stringValue)"
+                        )
+                    )
+
                 }
-                self.pointRealmResults = realm.objects(PointRecord.self)
+                self.pointArr = self.pointArr.reversed()
+
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -145,28 +155,26 @@ class MyRecordTableViewController: UITableViewController {
     }
     
     private func getParkingRecord(){
-        let realm = try! Realm()
+
         Alamofire.request(server + "parkingRecord/json", method: .get).validate().responseJSON { response in
-            print("Shopping Record: \(response.result.value)") // response serialization resul
+            print("Parking Record: \(response.result.value)") // response serialization resul
             switch response.result {
             case .success(let value):
                 let json:JSON = JSON(value);
-                // Delete all objects from the realm
-                try! realm.write {
-                    realm.deleteAll()
-                }
+                self.parkingArr.removeAll()
                 for index in 0..<json.count {
-                    let parking = ParkingRecord()
-                    parking.mallName = json[index]["mallName"].stringValue
-                    parking.carparkName = json[index]["carparkName"].stringValue
-                    parking.enterAt = json[index]["enterAt"].stringValue
-                    parking.leaveAt = json[index]["leaveAt"].stringValue
-                    parking.licensePlate = json[index]["licensePlate"].stringValue
-                    try! realm.write {
-                        realm.add(parking)
-                    }
+                    self.parkingArr.append(
+                        Parking(
+                            mallName: "\(json[index]["mallName"].stringValue)",
+                            carparkName : "\(json[index]["carparkName"].stringValue)",
+                            enterAt : "\(json[index]["enterAt"].stringValue)",
+                            leaveAt : "\(json[index]["leaveAt"].stringValue)",
+                            licensePlate : "\(json[index]["licensePlate"].stringValue)"
+                        )
+                    )
                 }
-                self.parkingRealmResults = realm.objects(ParkingRecord.self)
+
+                self.parkingArr = self.parkingArr.reversed()
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -178,30 +186,12 @@ class MyRecordTableViewController: UITableViewController {
         switch(self.segmentedControl.selectedSegmentIndex)
         {
             case 0:
-                if let r = self.pointRealmResults {
-                    print("point")
-                    print(r.count)
-                    return r.count
-                } else {
-                    return 0
-                }
+                    return pointArr.count
             case 1:
-                if let r = self.shoppingRealmResults {
-                     print("shopping")
-                    print(r.count)
-                    return r.count
-                } else {
-                    return 0
-                }
+                    return shoppingArr.count
             case 2:
-                if let r = self.parkingRealmResults {
-                    print("parking")
-                    print(r.count)
-                    return r.count
-                } else {
-                    return 0
-                }
-            
+                    return parkingArr.count
+   
             default:
                 break
         }
@@ -209,36 +199,40 @@ class MyRecordTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath)
         switch(self.segmentedControl.selectedSegmentIndex)
         {
         case 0:
             let myCell = tableView.dequeueReusableCell(withIdentifier: "PointTableViewCell", for: indexPath) as!PointTableViewCell
-            myCell.dateLabel.text = getDate(dateString:self.pointRealmResults![indexPath.row].actionAt!)
-//            myCell.typeImage.text = self.pointRealmResults?[indexPath.row].mallName
-            myCell.mallLabel.text = self.pointRealmResults?[indexPath.row].mallName
-            if(self.pointRealmResults![indexPath.row].type == "redeem"){
-                myCell.pointLabel.text = "- \(self.pointRealmResults![indexPath.row].amount)"
+            myCell.dateLabel.text = getDate(dateString:self.pointArr[indexPath.row].actionAt)
+            myCell.mallLabel.text = self.pointArr[indexPath.row].mallName
+            if(self.pointArr[indexPath.row].recordType == "redeem"){
+                myCell.pointLabel.text = "- \(self.pointArr[indexPath.row].amount) points"
+                myCell.typeImage.image = UIImage(named: "out")
+                
             }else{
-                myCell.pointLabel.text = "+ \(self.pointRealmResults![indexPath.row].amount)"
+                myCell.pointLabel.text = "+ \(self.pointArr[indexPath.row].amount) points"
+                myCell.typeImage.image = UIImage(named: "in")
             }
+
             return myCell
         case 1:
             let myCell = tableView.dequeueReusableCell(withIdentifier: "ShoppingTableViewCell", for: indexPath) as! ShoppingTableViewCell
-            myCell.dateLabel.text = getDate(dateString: self.shoppingRealmResults![indexPath.row].addAt!)
-            myCell.mallLabel.text = String(self.shoppingRealmResults![indexPath.row].mallName!)
-            myCell.shopLabel.text = String(self.shoppingRealmResults![indexPath.row].shopName!)
-            myCell.pointLabel.text = "+ \(self.shoppingRealmResults![indexPath.row].point!)"
-            myCell.consumLabel.text = "HKD \(self.shoppingRealmResults![indexPath.row].consumption!)"
+            myCell.dateLabel.text = getDate(dateString: self.shoppingArr[indexPath.row].addAt)
+            myCell.mallLabel.text = String(self.shoppingArr[indexPath.row].mallName)
+            myCell.shopLabel.text = String(self.shoppingArr[indexPath.row].shopName)
+            myCell.pointLabel.text = "+ \(self.shoppingArr[indexPath.row].point) points"
+            myCell.consumLabel.text = "HKD \(self.shoppingArr[indexPath.row].consumption)"
             return myCell
         
         case 2:
             let myCell = tableView.dequeueReusableCell(withIdentifier: "ParkingTableViewCell", for: indexPath) as! ParkingTableViewCell
-            myCell.dateLabel.text = getDate(dateString: self.parkingRealmResults![indexPath.row].enterAt!)
-            myCell.licenseLabel.text = self.parkingRealmResults?[indexPath.row].licensePlate
-            myCell.carparkLabel.text = self.parkingRealmResults?[indexPath.row].carparkName
-            myCell.inLabel.text = getTime(dateString: (self.parkingRealmResults?[indexPath.row].enterAt)!)
-            myCell.outLabel.text = getTime(dateString: (self.parkingRealmResults?[indexPath.row].leaveAt)!)
+            myCell.dateLabel.text = getDate(dateString: self.parkingArr[indexPath.row].enterAt)
+            myCell.licenseLabel.text = self.parkingArr[indexPath.row].licensePlate
+            myCell.carparkLabel.text = self.parkingArr[indexPath.row].carparkName
+            myCell.inLabel.text = getTime(dateString: (self.parkingArr[indexPath.row].enterAt))
+            myCell.outLabel.text = getTime(dateString: (self.parkingArr[indexPath.row].leaveAt))
             return myCell
         default:
             break

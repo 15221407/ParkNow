@@ -23,6 +23,8 @@ class MyCarViewController: UIViewController {
     @IBOutlet var durationLabel: UILabel!
     @IBOutlet var durationLabel2: UILabel!
     @IBOutlet var whereBtn: UIButton!
+    @IBOutlet var mallLabel: UILabel!
+    
     var parkingTime = 0 ;
     var licensePlate: String = ""
     
@@ -36,8 +38,16 @@ class MyCarViewController: UIViewController {
         self.setUpLabel()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        self.resetValue();
+    }
+    
+    private func resetValue(){
+        
+    }
+    
     @IBAction func whereBtnClicked(_ sender: Any) {
-        let parameters : Parameters = ["licensePlate": self.licensePlate]
+            let parameters : Parameters = ["licensePlate": self.licensePlate]
          Alamofire.request(server + "RFIDTag/getLocation", method: .post, parameters: parameters).responseString { response in
             print("Get Location: \(response.result.value ?? "No Record")")
             switch response.result{
@@ -82,6 +92,7 @@ class MyCarViewController: UIViewController {
         //not allow users register their car and prepay the parking fee without login
         if(UserDefaults.standard.string(forKey: "username") != nil){
             self.registerBtn.isHidden = false;
+            self.prepayBtn.isEnabled = false;
             self.prepayBtn.isHidden = true;
             self.whereBtn.isHidden = true;
             Alamofire.request(server + "parkingrecord/getParkingState").responseString { response in
@@ -93,7 +104,7 @@ class MyCarViewController: UIViewController {
                     if(resArr[0] == "enter" && resArr[1] == "N" ){
                         self.prepayBtn.isHidden = false;
                         self.prepayBtn.isEnabled = true;
-                        self.whereBtn.isHidden = false;
+                        self.whereBtn.isHidden = false
                     }else if (resArr[0] == "enter" && resArr[1] == "Y" ){
                         self.prepayBtn.isHidden = false;
                         self.prepayBtn.isEnabled = false;
@@ -113,6 +124,7 @@ class MyCarViewController: UIViewController {
     
    private func setUpLabel(){
         self.licensePlate = "";
+        self.mallLabel.text = "--";
         self.plateLabel.text = "--";
         self.entryDateLabel2.text = "--";
         self.enterAtLabel2.text = "--";
@@ -132,7 +144,19 @@ class MyCarViewController: UIViewController {
                     break
                 }
         }
-        
+            Alamofire.request(server + "parkingrecord/getMallName").responseString { response in
+                print("Get Mall: \(response.result.value ?? "No Record")")
+                switch response.result{
+                case .success(let value):
+                    let json:JSON = JSON(value);
+                    if(json != "No Record"){
+                        self.mallLabel.text = value ;
+                    }
+                case .failure(let error):
+                    break
+                }
+            }
+            
             Alamofire.request(server + "parkingrecord/getEnterAt").responseString { response in
                 print("Get DateTime: \(response.result.value ?? "No Record")")
                 switch response.result{

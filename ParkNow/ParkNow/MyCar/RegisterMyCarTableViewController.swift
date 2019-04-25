@@ -42,7 +42,7 @@ class RegisterMyCarTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-         self.tableView.reloadData()
+//         self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -102,7 +102,7 @@ class RegisterMyCarTableViewController: UITableViewController {
     
     func registerMyCar() {
         let licenseString = licenseTF.text!.removingWhitespaces()
-        let parameters : Parameters = ["licensePlate": licenseString]
+        let parameters : Parameters = ["licensePlate": licenseString.uppercased()]
         Alamofire.request(server + "car/registerYourCar", method: .post, parameters: parameters)
             .responseString { response in
                 print("Register your car: \(response.result.value ?? "No data")")
@@ -139,16 +139,15 @@ class RegisterMyCarTableViewController: UITableViewController {
                 case .success(let value):
                     var json:JSON = JSON(value);
                     if(json == "Successfully Removed." ){
+                        self.getCar()
                         let alertController = UIAlertController(title: "ParkNow", message: response.result.value, preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                         self.present(alertController, animated: true, completion: nil)
-                        self.getCar()
                     }else{
+                        self.getCar()
                         let alertController = UIAlertController(title: "ParkNow", message: response.result.value, preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                         self.present(alertController, animated: true, completion: nil)
-                        self.getCar()
-                        
                     }
                 case .failure(let error):
                     break

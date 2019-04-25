@@ -25,13 +25,14 @@ class PrepaymentViewController: UIViewController {
     @IBOutlet var free3Btn: UIButton!
     
     @IBOutlet var ChargeLabel: UILabel!
-    @IBOutlet var newChargeLabel: UILabel!
-    
+
     @IBOutlet var PointLabel: UILabel!
-    @IBOutlet var newPointLabel: UILabel!
     
     @IBOutlet var confirmBtn: UIButton!
     @IBOutlet var cancelbtn: UIButton!
+    @IBOutlet var free1Label: UILabel!
+    @IBOutlet var free2Label: UILabel!
+    @IBOutlet var free3Label: UILabel!
     
     var mallName:String? = nil
     var currentPoint:Int = 0
@@ -102,12 +103,20 @@ class PrepaymentViewController: UIViewController {
     }
     
     private func setUpButton(){
+        self.free1Btn.layer.masksToBounds = true
+        self.free1Btn.layer.cornerRadius = self.free1Btn.frame.width/2
+        self.free2Btn.layer.masksToBounds = true
+        self.free2Btn.layer.cornerRadius = self.free1Btn.frame.width/2
+        self.free3Btn.layer.masksToBounds = true
+        self.free3Btn.layer.cornerRadius = self.free1Btn.frame.width/2
         self.confirmBtn.isEnabled = true;
         self.cancelbtn.isEnabled = true;
-        
         self.free1Btn.isEnabled = false
         self.free2Btn.isEnabled = false
         self.free3Btn.isEnabled = false
+        self.free1Label.text = "\(self.hourCharge1) points"
+        self.free2Label.text = "\(self.hourCharge2) points"
+        self.free3Label.text = "\(self.hourCharge3) points"
         if( self.currentPoint >= self.hourCharge3 && self.totalHour >= 3 ){
             self.free1Btn.isEnabled = true
             self.free2Btn.isEnabled = true
@@ -227,10 +236,6 @@ class PrepaymentViewController: UIViewController {
             let result = String(data: data!, encoding: String.Encoding.utf8)
             print("Prepayment result: \(result ?? "No data")")
             if(result == "Charged succefully"){
-//                let alertController = UIAlertController(title: "Confirm Payment", message: "You have paid $" + String(self.totalCharge), preferredStyle: .alert)
-//                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {(alertAction)in  self.navigationController?.popToRootViewController(animated: true)}))
-//                self.present(alertController, animated: true, completion: nil)
-//                self.totalCharge = 0 ;
                 self.updatePayment();
             }
             }.resume()
@@ -239,40 +244,40 @@ class PrepaymentViewController: UIViewController {
     @IBAction func free1BtnClicked(_ sender: Any) {
         self.redemptionHour = 1
         self.redemptionPoint = hourCharge1;
-        self.free1Btn.backgroundColor = UIColor(red:0.96, green:0.85, blue:0.06, alpha:1.0)
-        self.free2Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
-        self.free3Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
+        self.free1Btn.backgroundColor = UIColor(red:0.80, green:0.40, blue:0.05, alpha:1.0)
+        self.free2Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
+        self.free3Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
         self.setUpLabel()
-        self.setUpButton()
+//        self.setUpButton()
     }
     
     @IBAction func free2BtnClicked(_ sender: Any) {
         self.redemptionHour = 2
         self.redemptionPoint = hourCharge2;
-        self.free1Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
-        self.free2Btn.backgroundColor = UIColor(red:0.96, green:0.85, blue:0.06, alpha:1.0)
-        self.free3Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
+        self.free1Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
+        self.free2Btn.backgroundColor = UIColor(red:0.80, green:0.40, blue:0.05, alpha:1.0)
+        self.free3Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
         self.setUpLabel()
-        self.setUpButton()
+//        self.setUpButton()
     }
     
     @IBAction func free3BtnClicked(_ sender: Any) {
         self.redemptionHour = 3
         self.redemptionPoint = hourCharge3;
-        self.free1Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
-        self.free2Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
-        self.free3Btn.backgroundColor = UIColor(red:0.96, green:0.85, blue:0.06, alpha:1.0)
+        self.free1Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
+        self.free2Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
+        self.free3Btn.backgroundColor = UIColor(red:0.80, green:0.40, blue:0.05, alpha:1.0)
         self.setUpLabel()
-        self.setUpButton()
+//        self.setUpButton()
     }
     @IBAction func clearOpiton(_ sender: Any) {
         self.redemptionHour = 0
         self.redemptionPoint = 0 ;
-        self.free1Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
-        self.free2Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
-        self.free3Btn.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
+        self.free1Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
+        self.free2Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
+        self.free3Btn.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
         self.setUpLabel()
-        self.setUpButton()
+//        self.setUpButton()
     }
     
     private func perpareForcharge(){
@@ -296,7 +301,7 @@ class PrepaymentViewController: UIViewController {
                 self.totalCharge = Int(resArr[1])!
                 self.finalCharge = self.totalCharge - self.redemptionPoint
                 let alertController = UIAlertController(title: "Confirm Payment", message: "Total Charge: $" + String(self.finalCharge), preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in self.resetBtn() } ))
                 alertController.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { action in self.perpareForcharge() }))
                 self.present(alertController, animated: true, completion: nil)
             case .failure(let error):
@@ -305,6 +310,10 @@ class PrepaymentViewController: UIViewController {
             }
         }
         
+    }
+    
+    func resetBtn(){
+        self.confirmBtn.isEnabled = true;
     }
     
     @IBAction func cancalBtnClicked(_ sender: Any) {

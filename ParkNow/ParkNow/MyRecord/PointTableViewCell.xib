@@ -20,65 +20,62 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0c-Ol-Dbw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcM-5D-x5Z">
-                                <rect key="frame" x="25" y="18.5" width="139" height="21"/>
+                                <rect key="frame" x="98" y="18" width="139" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="139" id="Vcf-cP-aG3"/>
-                                    <constraint firstAttribute="height" constant="21" id="a7m-74-cwJ"/>
+                                    <constraint firstAttribute="height" constant="21" id="GWU-qN-ftG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="OriyaSangamMN-Bold" family="Oriya Sangam MN" pointSize="15"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN-Bold" family="Oriya Sangam MN" pointSize="13"/>
+                                <color key="textColor" red="0.87098878622055054" green="0.58695119619369507" blue="0.060199663043022156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTo-PW-RSS">
-                                <rect key="frame" x="102" y="47.5" width="210" height="21"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point" translatesAutoresizingMaskIntoConstraints="NO" id="Kh8-UY-zUb">
+                                <rect key="frame" x="15" y="18" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="IlJ-3A-IvR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kh8-UY-zUb">
-                                <rect key="frame" x="25" y="47.5" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3aQ-Wr-PWn"/>
-                                    <constraint firstAttribute="width" constant="50" id="HrA-ez-CE2"/>
+                                    <constraint firstAttribute="width" constant="70" id="29k-Tr-lla"/>
+                                    <constraint firstAttribute="height" constant="70" id="OwY-Xv-c5O"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="PFl-Om-nzq"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7D2-n5-V5J">
-                                <rect key="frame" x="102" y="70.5" width="210" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="LRP-Zx-9ZA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="12"/>
+                                <rect key="frame" x="98" y="38" width="210" height="21"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="10"/>
+                                <color key="textColor" red="0.87098878622055054" green="0.58695119619369507" blue="0.060199663043022156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTo-PW-RSS">
+                                <rect key="frame" x="98" y="55" width="210" height="21"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="LTo-PW-RSS" firstAttribute="trailing" secondItem="X0c-Ol-Dbw" secondAttribute="trailingMargin" id="5V1-C2-xuH"/>
-                            <constraint firstItem="Kh8-UY-zUb" firstAttribute="top" secondItem="LTo-PW-RSS" secondAttribute="top" id="9Fi-cw-Zpb"/>
-                            <constraint firstItem="tcM-5D-x5Z" firstAttribute="top" secondItem="X0c-Ol-Dbw" secondAttribute="top" constant="18" id="HoV-OS-AeX"/>
-                            <constraint firstItem="tcM-5D-x5Z" firstAttribute="leading" secondItem="Kh8-UY-zUb" secondAttribute="leading" id="XIC-l9-KES"/>
-                            <constraint firstItem="7D2-n5-V5J" firstAttribute="top" secondItem="LTo-PW-RSS" secondAttribute="bottom" constant="2" id="Y8W-PR-iLV"/>
-                            <constraint firstItem="7D2-n5-V5J" firstAttribute="leading" secondItem="LTo-PW-RSS" secondAttribute="leading" id="gC2-PX-5Mv"/>
-                            <constraint firstAttribute="bottom" secondItem="Kh8-UY-zUb" secondAttribute="bottom" constant="10" id="mo5-iw-CHz"/>
-                            <constraint firstItem="LTo-PW-RSS" firstAttribute="leading" secondItem="Kh8-UY-zUb" secondAttribute="trailing" constant="27" id="sqU-cd-uaP"/>
-                            <constraint firstItem="Kh8-UY-zUb" firstAttribute="top" secondItem="tcM-5D-x5Z" secondAttribute="bottom" constant="8" symbolic="YES" id="ubq-bI-0x9"/>
-                            <constraint firstItem="tcM-5D-x5Z" firstAttribute="leading" secondItem="X0c-Ol-Dbw" secondAttribute="leading" constant="25" id="uoN-Ss-dqA"/>
-                            <constraint firstItem="LTo-PW-RSS" firstAttribute="trailing" secondItem="7D2-n5-V5J" secondAttribute="trailing" id="xzb-WF-Nvq"/>
+                            <constraint firstAttribute="trailing" secondItem="7D2-n5-V5J" secondAttribute="trailing" constant="12" id="BMu-I0-Pdf"/>
+                            <constraint firstAttribute="trailing" secondItem="tcM-5D-x5Z" secondAttribute="trailing" constant="83" id="EFa-vA-BGd"/>
+                            <constraint firstAttribute="bottom" secondItem="Kh8-UY-zUb" secondAttribute="bottom" constant="20" id="HlJ-bj-4pB"/>
+                            <constraint firstItem="7D2-n5-V5J" firstAttribute="leading" secondItem="LTo-PW-RSS" secondAttribute="leading" id="JZc-XM-hOn"/>
+                            <constraint firstItem="Kh8-UY-zUb" firstAttribute="top" secondItem="X0c-Ol-Dbw" secondAttribute="top" constant="18" id="NBA-E0-UeV"/>
+                            <constraint firstAttribute="bottom" secondItem="LTo-PW-RSS" secondAttribute="bottom" constant="32" id="SoE-0j-MXS"/>
+                            <constraint firstItem="7D2-n5-V5J" firstAttribute="top" secondItem="X0c-Ol-Dbw" secondAttribute="top" constant="38" id="SpJ-09-3nN"/>
+                            <constraint firstItem="tcM-5D-x5Z" firstAttribute="leading" secondItem="Kh8-UY-zUb" secondAttribute="trailing" constant="13" id="bBx-Cm-yEO"/>
+                            <constraint firstItem="7D2-n5-V5J" firstAttribute="trailing" secondItem="LTo-PW-RSS" secondAttribute="trailing" id="c04-Tg-TGY"/>
+                            <constraint firstItem="Kh8-UY-zUb" firstAttribute="top" secondItem="tcM-5D-x5Z" secondAttribute="top" id="gRe-mX-bgQ"/>
+                            <constraint firstItem="LTo-PW-RSS" firstAttribute="top" secondItem="tcM-5D-x5Z" secondAttribute="bottom" constant="16" id="hge-so-ZYP"/>
+                            <constraint firstAttribute="bottom" secondItem="7D2-n5-V5J" secondAttribute="bottom" constant="49" id="hqQ-5M-ObM"/>
+                            <constraint firstItem="tcM-5D-x5Z" firstAttribute="leading" secondItem="7D2-n5-V5J" secondAttribute="leading" id="v4c-fs-IWV"/>
+                            <constraint firstItem="Kh8-UY-zUb" firstAttribute="leading" secondItem="X0c-Ol-Dbw" secondAttribute="leading" constant="15" id="zzJ-GR-z5n"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="X0c-Ol-Dbw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="67q-gJ-ayz"/>
-                    <constraint firstItem="X0c-Ol-Dbw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Dug-vA-BKg"/>
-                    <constraint firstAttribute="trailing" secondItem="X0c-Ol-Dbw" secondAttribute="trailing" id="ZmD-MJ-BV0"/>
-                    <constraint firstAttribute="bottom" secondItem="X0c-Ol-Dbw" secondAttribute="bottom" id="dpL-Bh-hxD"/>
+                    <constraint firstItem="X0c-Ol-Dbw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ESG-Ot-IaV"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="X0c-Ol-Dbw" secondAttribute="bottom" constant="-19" id="P1G-rC-a0X"/>
+                    <constraint firstItem="X0c-Ol-Dbw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZWy-sd-VXf"/>
+                    <constraint firstAttribute="trailing" secondItem="X0c-Ol-Dbw" secondAttribute="trailing" id="rzD-tY-ou1"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -91,4 +88,7 @@
             <point key="canvasLocation" x="137.59999999999999" y="134.93253373313345"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="point" width="90.239997863769531" height="90.239997863769531"/>
+    </resources>
 </document>
